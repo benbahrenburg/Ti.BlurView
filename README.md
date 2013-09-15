@@ -62,7 +62,7 @@ WIP
 
 WIP
 
-<h3>Example</h3>
+<h3>Examples</h3>
 Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.BlurView/tree/master/example) for examples on how to use this module.
 
 <b>Example - Blurred Background</b>
@@ -81,11 +81,6 @@ Please check the module's example folder or on [github](https://github.com/benba
 <pre><code>
 </code></pre>
 
-<h2>Attribution</h2>
-
-The Blur method uses CoreImage in the fashion detailed by Evan Davis [here](http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks).
-
-The image used in all of the examples is by [thenails](http://www.flickr.com/people/thenails1/) and is licenced under Creative Commons. This image is and associated licensing is available [here](http://ny-pictures.com/nyc/photo/picture/42553/nostalgic_view_famous_hall).
 
 <h3>Twitter</h3>
 
@@ -94,3 +89,9 @@ If you like the Titanium module,please consider following the [@benCoding Twitte
 <h3>Blog</h3>
 
 For module updates, Titanium tutorials and more please check out my blog at [benCoding.Com](http://benCoding.com).
+
+<h3>Attribution</h3>
+
+The Blur method uses CoreImage in the fashion detailed by Evan Davis [here](http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks).
+
+The image used in all of the examples is by [thenails](http://www.flickr.com/people/thenails1/) and is licenced under Creative Commons. This image is and associated licensing is available [here](http://ny-pictures.com/nyc/photo/picture/42553/nostalgic_view_famous_hall).

@@ -20,7 +20,8 @@
     //Set our blur defaults
     _blurLevel = [NSNumber numberWithFloat:5.0f];
     _blurFilter = @"CIGaussianBlur";
-    
+    _cropToFit = YES;
+    _blurTint = [UIColor clearColor];
 	[super initializeState];
 }
 
@@ -42,6 +43,17 @@
 	}
 }
 
+-(void) setBlurTintColor_:(id)value
+{
+    TiColor *newColor = [TiUtils colorValue:value];
+    _blurTint = [newColor _color];
+}
+
+-(void) setBlurCroppedToRect_:(id)value
+{
+    _cropToFit =[TiUtils boolValue:value def:YES];
+}
+
 -(void) setBlurFilter_:(id)value
 {
     ENSURE_SINGLE_ARG(value,NSString);
@@ -51,6 +63,37 @@
 -(void) setBlurLevel_:(id)value
 {
     _blurLevel =[NSNumber numberWithDouble:[TiUtils doubleValue:value def:15.0]];
+}
+
+- (UIImage *)imageCroppedToRect:(CGRect)rect theImage:(UIImage*)theImage
+{
+	CGImageRef imageRef = CGImageCreateWithImageInRect([theImage CGImage], rect);
+	UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+	CGImageRelease(imageRef);
+	return cropped;
+}
+
+-(UIImage*)addTint:(UIImage*)theImage withColor:(UIColor*) color
+{
+    CIImage *beginImage = [CIImage imageWithCGImage:theImage.CGImage];
+    CIContext *context = [CIContext contextWithOptions:nil];
+    
+    //create some blue
+    CIFilter* tintGenerator = [CIFilter filterWithName:@"CIConstantColorGenerator"];
+    CIColor* tintColor = [CIColor colorWithCGColor:[color CGColor]];
+    //CIColor* blue = [CIColor colorWithString:@"0.1 0.5 0.8 1.0"];
+    [tintGenerator setValue:tintColor forKey:@"inputColor"];
+    CIImage* tintImage = [tintGenerator valueForKey:@"outputImage"];
+    
+    //apply a multiply filter
+    CIFilter* filterm = [CIFilter filterWithName:@"CIMultiplyCompositing"];
+    [filterm setValue:tintImage forKey:kCIInputImageKey];
+    
+    [filterm setValue:beginImage forKey:@"inputBackgroundImage"];
+    CIImage *result  = [filterm valueForKey:kCIOutputImageKey];
+    
+    CGImageRef cgImage = [context createCGImage:result fromRect:[beginImage extent]];
+    return [UIImage imageWithCGImage:cgImage];
 }
 
 -(UIImage*) doBlurEffect :(UIImage*)theImage
@@ -80,15 +123,43 @@
     //CREATE A BLOG IMAGE FROM OUR PROXY
     TiBlob* blobImage = [viewProxy toImage:nil];
     
+    //GET THE UIIMAGE FROM THE BLOB, WE'LL BE WORKING WITH THIS FOR AWHILE
+    UIImage* workingImg = [blobImage image];
+    
+    //CHECK IF WE NEED TO CROP TO THE VIEW'S FRAME
+    if(_cropToFit ==YES){
+        workingImg = [self imageCroppedToRect:[self frame] theImage:workingImg];
+    }
+    
+    //CHECK IF A CUSTOM TINT HAS BEEN APPLIED
+    if(_blurTint !=[UIColor clearColor]){
+        workingImg  = [self addTint:workingImg withColor:_blurTint];
+    }
+        
     //PASS THE IMAGE FROM OUR BLOB INTO OUR EFFECT METHOD
-    [self blurView].image = [self doBlurEffect:[blobImage image]];
+    [self blurView].image = [self doBlurEffect:workingImg];
+    
 }
 
 -(void) setImageToBlur_:(id)args
 {
+    //LOAD THE IMAGE
     NSURL *url = [TiUtils toURL:args proxy:self.proxy];
-    UIImage *theImage = [[ImageLoader sharedLoader] loadImmediateImage:url];
-    [self blurView].image = [self doBlurEffect:theImage];
+    //HANG FETCH THE IMAGE AND HANDL ONTO IT WHILE WE WORK
+    UIImage *workingImg = [[ImageLoader sharedLoader] loadImmediateImage:url];
+    
+    //CHECK IF WE NEED TO CROP TO THE VIEW'S FRAME
+    if(_cropToFit ==YES){
+        workingImg = [self imageCroppedToRect:[self frame] theImage:workingImg];
+    }
+    
+    //CHECK IF A CUSTOM TINT HAS BEEN APPLIED
+    if(_blurTint !=[UIColor clearColor]){
+        workingImg  = [self addTint:workingImg withColor:_blurTint];
+    }
+    
+    //PASS THE IMAGE FROM OUR BLOB INTO OUR EFFECT METHOD
+    [self blurView].image = [self doBlurEffect:workingImg];
 }
 
 @end

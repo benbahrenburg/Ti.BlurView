@@ -14,6 +14,8 @@
 {
     return [NSArray arrayWithObjects:
             @"blurLevel",
+            @"blurCroppedToRect",
+            @"blurTintColor",
             @"viewToBlur",
             @"imageToBlur",
             nil];

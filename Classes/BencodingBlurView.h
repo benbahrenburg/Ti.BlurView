@@ -11,6 +11,8 @@
 	UIImageView *_square;
     NSNumber * _blurLevel;
     NSString * _blurFilter;
+    BOOL _cropToFit;
+    UIColor *_blurTint;
 }
 
 @end

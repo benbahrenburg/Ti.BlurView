@@ -18,7 +18,8 @@ win.add(bgView);
 
 var blurView = mod.createView({
 	height:Ti.UI.FILL,
-	width:Ti.UI.FILL, blurLevel:5
+	width:Ti.UI.FILL, 
+	blurLevel:5, blurCroppedToRect:false
 });
 bgView.add(blurView);	
 

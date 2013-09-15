@@ -18,7 +18,7 @@
     //This is alittle hacky but, on init create and add our view
     UIImageView *sq = [self blurView];
     //Set our blur defaults
-    _blurLevel = [NSNumber numberWithFloat:15.0f];
+    _blurLevel = [NSNumber numberWithFloat:5.0f];
     _blurFilter = @"CIGaussianBlur";
     
 	[super initializeState];
@@ -44,12 +44,13 @@
 
 -(void) setBlurFilter_:(id)value
 {
-    _blurLevel =[NSNumber numberWithFloat:[TiUtils floatValue:value]];
+    ENSURE_SINGLE_ARG(value,NSString);
+    _blurFilter =[TiUtils stringValue:value];
 }
 
 -(void) setBlurLevel_:(id)value
 {
-    _blurFilter =[TiUtils stringValue:value];
+    _blurLevel =[NSNumber numberWithDouble:[TiUtils doubleValue:value def:15.0]];
 }
 
 -(UIImage*) doBlurEffect :(UIImage*)theImage
@@ -74,10 +75,11 @@
 
 -(void) setViewToBlur_:(id)viewProxy
 {
-    //ENSURE_UI_THREAD_1_ARG(viewProxy);
+
     ENSURE_SINGLE_ARG(viewProxy, TiViewProxy);
     //CREATE A BLOG IMAGE FROM OUR PROXY
     TiBlob* blobImage = [viewProxy toImage:nil];
+    
     //PASS THE IMAGE FROM OUR BLOB INTO OUR EFFECT METHOD
     [self blurView].image = [self doBlurEffect:[blobImage image]];
 }

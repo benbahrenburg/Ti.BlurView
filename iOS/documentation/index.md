@@ -307,18 +307,18 @@ bgView.add(imgView);
 
 win.addEventListener('open',function(d){
 
-	var img = mod.applyBlurToImage({
+	var img = mod.applyBlurTo({
 		blobToBlur: bgView.toImage(),
 		blurLevel:5, blurTintColor:"#9EDEB8"
 	});
 
-	blurView.image = img;
+	imgView.image = img;
 
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
 		top:100, height:150, left:40, right:40
 	});
-	blurView.add(container);
+	imgView.add(container);
 	var label = Ti.UI.createLabel({
 		text:"Show how to blur like the yahoo weather app.", 
 		color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
@@ -351,7 +351,7 @@ bgView.add(imgView);
 
 win.addEventListener('open',function(d){
 
-	var img = mod.applyBlurToImage({
+	var img = mod.applyBlurTo({
 		blobToBlur: bgView.toImage(),
 		blurLevel:5, blurTintColor:"#9EDEB8",
 		cropToRect:{
@@ -362,13 +362,13 @@ win.addEventListener('open',function(d){
 		}
 	});
 	
-	blurView.image = img;
+	imgView.image = img;
 
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
 		top:100, height:150, left:40, right:40
 	});
-	blurView.add(container);
+	imgView.add(container);
 	var label = Ti.UI.createLabel({
 		text:"Show how to blur like the yahoo weather app.", 
 		color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"

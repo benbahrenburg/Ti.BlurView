@@ -2,9 +2,9 @@
 
 The Ti.BlurView project allows you to create a blur view using either the contents of a view or a provided image.
 
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/blurview_background_demo.png)
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/blurview_cropped_demo.png)
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/blurview_tinted_cropped_demo.png)
+![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_background_demo.png)
+![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_cropped_demo.png)
+![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_tinted_cropped_demo.png)
 
 <h2>Before you start</h2>
 * This is an iOS native module designed to work with Titanium SDK 3.1.2.GA
@@ -13,7 +13,7 @@ The Ti.BlurView project allows you to create a blur view using either the conten
 
 <h2>Download the compiled release</h2>
 
-Download the module from the [dist folder](https://github.com/benbahrenburg/Ti.BlurView/tree/master/dist)
+Download the module from the [dist folder](https://github.com/benbahrenburg/Ti.BlurView/tree/master/iOS/dist)
 
 <h2>Building from source?</h2>
 
@@ -82,7 +82,7 @@ Other valid values would be CIBoxBlur:
  - CIZoomBlur
 
 <h3>Examples</h3>
-Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.BlurView/tree/master/example) for examples on how to use this module.
+Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.BlurView/tree/master/iOS/example) for examples on how to use this module.
 
 <b>Example - Blurred Background</b>
 <pre><code>

@@ -8,7 +8,7 @@ The Ti.BlurView project allows you to create a blur view using either the conten
 
 <h2>Before you start</h2>
 * This is an iOS native module designed to work with Titanium SDK 3.1.2.GA
-* This will only work with iOS <b>6.1</b> or greater
+* This will only work with iOS <b>6</b> or greater
 * Before using this module you first need to install the package. If you need instructions on how to install a 3rd party module please read this installation guide.
 
 <h2>Download the compiled release</h2>

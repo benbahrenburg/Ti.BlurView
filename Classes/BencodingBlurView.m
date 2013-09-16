@@ -16,7 +16,7 @@
 {
  
     //This is alittle hacky but, on init create and add our view
-    UIImageView *sq = [self blurView];
+    [self blurView];
     //Set our blur defaults
     _blurLevel = [NSNumber numberWithFloat:5.0f];
     _blurFilter = @"CIGaussianBlur";
@@ -93,7 +93,9 @@
     CIImage *result  = [filterm valueForKey:kCIOutputImageKey];
     
     CGImageRef cgImage = [context createCGImage:result fromRect:[beginImage extent]];
-    return [UIImage imageWithCGImage:cgImage];
+    UIImage* results = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    return results;
 }
 
 -(UIImage*) doBlurEffect :(UIImage*)theImage
@@ -113,7 +115,9 @@
     CIImage *result = [filter valueForKey:kCIOutputImageKey];
     //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
     CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
-    return [UIImage imageWithCGImage:cgImage];
+    UIImage* results = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    return results;
 }
 
 -(void) setViewToBlur_:(id)viewProxy
@@ -125,6 +129,9 @@
     
     //GET THE UIIMAGE FROM THE BLOB, WE'LL BE WORKING WITH THIS FOR AWHILE
     UIImage* workingImg = [blobImage image];
+ 
+    // BE SMART ABOUT THIS AND ONLY TRY TO BLUR IF SUPPORTED
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_6_0
     
     //CHECK IF WE NEED TO CROP TO THE VIEW'S FRAME
     if(_cropToFit ==YES){
@@ -135,7 +142,9 @@
     if(_blurTint !=[UIColor clearColor]){
         workingImg  = [self addTint:workingImg withColor:_blurTint];
     }
-        
+
+    #endif
+    
     //PASS THE IMAGE FROM OUR BLOB INTO OUR EFFECT METHOD
     [self blurView].image = [self doBlurEffect:workingImg];
     
@@ -147,6 +156,9 @@
     NSURL *url = [TiUtils toURL:args proxy:self.proxy];
     //HANG FETCH THE IMAGE AND HANDL ONTO IT WHILE WE WORK
     UIImage *workingImg = [[ImageLoader sharedLoader] loadImmediateImage:url];
+
+    // BE SMART ABOUT THIS AND ONLY TRY TO BLUR IF SUPPORTED
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_6_0
     
     //CHECK IF WE NEED TO CROP TO THE VIEW'S FRAME
     if(_cropToFit ==YES){
@@ -157,6 +169,8 @@
     if(_blurTint !=[UIColor clearColor]){
         workingImg  = [self addTint:workingImg withColor:_blurTint];
     }
+
+#endif
     
     //PASS THE IMAGE FROM OUR BLOB INTO OUR EFFECT METHOD
     [self blurView].image = [self doBlurEffect:workingImg];

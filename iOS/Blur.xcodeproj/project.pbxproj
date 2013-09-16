@@ -26,6 +26,8 @@
 		24DD6CFA1134B3F500162E58 /* BencodingBlurModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* BencodingBlurModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* BencodingBlurModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* BencodingBlurModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* BencodingBlurModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* BencodingBlurModuleAssets.m */; };
+		433C250017E77503006EC39D /* BXBImageHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 433C24FE17E77503006EC39D /* BXBImageHelpers.h */; };
+		433C250117E77503006EC39D /* BXBImageHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 433C24FF17E77503006EC39D /* BXBImageHelpers.m */; };
 		43A14F0517E4F0A700EE1BA0 /* BencodingBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14F0317E4F0A700EE1BA0 /* BencodingBlurView.h */; };
 		43A14F0617E4F0A700EE1BA0 /* BencodingBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14F0417E4F0A700EE1BA0 /* BencodingBlurView.m */; };
 		43A14F0917E4F0BE00EE1BA0 /* BencodingBlurViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A14F0717E4F0BE00EE1BA0 /* BencodingBlurViewProxy.h */; };
@@ -52,6 +54,8 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* BencodingBlurModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurModuleAssets.h; path = Classes/BencodingBlurModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* BencodingBlurModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurModuleAssets.m; path = Classes/BencodingBlurModuleAssets.m; sourceTree = "<group>"; };
+		433C24FE17E77503006EC39D /* BXBImageHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BXBImageHelpers.h; path = Classes/BXBImageHelpers.h; sourceTree = "<group>"; };
+		433C24FF17E77503006EC39D /* BXBImageHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BXBImageHelpers.m; path = Classes/BXBImageHelpers.m; sourceTree = "<group>"; };
 		43A14F0317E4F0A700EE1BA0 /* BencodingBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurView.h; path = Classes/BencodingBlurView.h; sourceTree = "<group>"; };
 		43A14F0417E4F0A700EE1BA0 /* BencodingBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurView.m; path = Classes/BencodingBlurView.m; sourceTree = "<group>"; };
 		43A14F0717E4F0BE00EE1BA0 /* BencodingBlurViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurViewProxy.h; path = Classes/BencodingBlurViewProxy.h; sourceTree = "<group>"; };
@@ -117,6 +121,8 @@
 				43A14F0417E4F0A700EE1BA0 /* BencodingBlurView.m */,
 				43A14F0717E4F0BE00EE1BA0 /* BencodingBlurViewProxy.h */,
 				43A14F0817E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m */,
+				433C24FE17E77503006EC39D /* BXBImageHelpers.h */,
+				433C24FF17E77503006EC39D /* BXBImageHelpers.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -138,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA747D9F0F9514B9006C5449 /* BencodingBlur_Prefix.pch in Headers */,
+				433C250017E77503006EC39D /* BXBImageHelpers.h in Headers */,
 				24DD6CF91134B3F500162E58 /* BencodingBlurModule.h in Headers */,
 				43A14F0917E4F0BE00EE1BA0 /* BencodingBlurViewProxy.h in Headers */,
 				43A14F0517E4F0A700EE1BA0 /* BencodingBlurView.h in Headers */,
@@ -217,6 +224,7 @@
 				24DD6CFA1134B3F500162E58 /* BencodingBlurModule.m in Sources */,
 				43A14F0617E4F0A700EE1BA0 /* BencodingBlurView.m in Sources */,
 				43A14F0A17E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m in Sources */,
+				433C250117E77503006EC39D /* BXBImageHelpers.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* BencodingBlurModuleAssets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

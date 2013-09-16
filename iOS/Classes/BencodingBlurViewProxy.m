@@ -16,6 +16,7 @@
             @"blurLevel",
             @"blurCroppedToRect",
             @"blurTintColor",
+            @"blurFilter",
             @"viewToBlur",
             @"imageToBlur",
             nil];

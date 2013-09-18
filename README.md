@@ -23,6 +23,7 @@ Import the project into Xcode:
 
 * Modify the titanium.xcconfig file with the path to your Titanium installation
 * When running this project from Xcode you might run into a compile issue. If this is the case you will need to update the titanium.xcconfig to include your username. See the below for an example:
+
 ~~~
 TITANIUM_SDK = /Users/benjamin/Library/Application Support/Titanium/mobilesdk/osx/$(TITANIUM_SDK_VERSION)
 ~~~

@@ -10,8 +10,6 @@
 @interface BXBImageHelpers : NSObject
 
 - (UIImage *)imageCroppedToRect:(CGRect)rect theImage:(UIImage*)theImage;
--(UIImage*)addTint:(UIImage*)theImage withColor:(UIColor*) color;
--(UIImage*) doBlurEffect :(UIImage*)theImage withFilter:(NSString*)blurFilter withLevel:(NSNumber*) blurLevel;
 -(UIImage*) applyBlur :(UIImage*)theImage
              withFilter:(NSString*)blurFilterName
               withLevel:(NSNumber*) blurLevel

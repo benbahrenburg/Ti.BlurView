@@ -18,94 +18,65 @@
 	return cropped;
 }
 
--(UIImage*)addTint:(UIImage*)theImage withColor:(UIColor*) color
-{
-    CIImage *beginImage = [CIImage imageWithCGImage:theImage.CGImage];
-    CIContext *context = [CIContext contextWithOptions:nil];
-    
-    CIFilter* tintGenerator = [CIFilter filterWithName:@"CIConstantColorGenerator"];
-    CIColor* tintColor = [CIColor colorWithCGColor:[color CGColor]];
-    [tintGenerator setValue:tintColor forKey:@"inputColor"];
-    CIImage* tintImage = [tintGenerator valueForKey:@"outputImage"];
-    
-    //apply a multiply filter
-    CIFilter* filterm = [CIFilter filterWithName:@"CIMultiplyCompositing"];
-    [filterm setValue:tintImage forKey:kCIInputImageKey];
-    
-    [filterm setValue:beginImage forKey:@"inputBackgroundImage"];
-    CIImage *result  = [filterm valueForKey:kCIOutputImageKey];
-    
-    CGImageRef cgImage = [context createCGImage:result fromRect:[beginImage extent]];
-    UIImage* results = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return results;
-}
-
--(UIImage*) doBlurEffect :(UIImage*)theImage withFilter:(NSString*)blurFilter withLevel:(NSNumber*) blurLevel
-{
-    // MODIFIED FROM THIS GREAT BLOG POST BY Evan Davis
-    //http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks
-    
-    //create our blurred image
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [CIImage imageWithCGImage:theImage.CGImage];
-    
-    //SET OF THE FILTER, WE USE A DEFAULT OF CIGaussianBlur YOU CAN CHANGE THIS BY CALLING THE setBlurFilter_ method
-    CIFilter *filter = [CIFilter filterWithName:blurFilter];
-    [filter setValue:inputImage forKey:kCIInputImageKey];
-    //THE LEVEL OR DISTANCE IS THEN SET YOU CAN OVERRIDE THIS BY CALLING setBlurLevel_
-    [filter setValue:blurLevel forKey:@"inputRadius"];
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    //CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches up exactly to the bounds of our original image
-    CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
-    UIImage* results = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return results;
-}
-
 -(UIImage*) applyBlur :(UIImage*)theImage
                withFilter:(NSString*)blurFilterName
                 withLevel:(NSNumber*) blurLevel
                  withTint:(UIColor*)tintColor
 {
-    // MODIFIED FROM THIS GREAT BLOG POST BY Evan Davis
-    //http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks
-    
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_6_0
-    return theImage;
-#endif
-    
-    //create our blurred image
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [CIImage imageWithCGImage:theImage.CGImage];
-    
-    //SET OF THE FILTER, WE USE A DEFAULT OF CIGaussianBlur YOU CAN CHANGE THIS BY CALLING THE setBlurFilter_ method
-    CIFilter *blurFilter = [CIFilter filterWithName:blurFilterName];
-    [blurFilter setValue:inputImage forKey:kCIInputImageKey];
-    //THE LEVEL OR DISTANCE IS THEN SET YOU CAN OVERRIDE THIS BY CALLING setBlurLevel_
-    [blurFilter setValue:blurLevel forKey:@"inputRadius"];
-    CIImage *blurImage = [blurFilter valueForKey:kCIOutputImageKey];
-    
-    if(tintColor !=[UIColor clearColor]){
 
-        CIFilter* tintFilter = [CIFilter filterWithName:@"CIConstantColorGenerator"];
-        CIColor* tintFilterColor = [CIColor colorWithCGColor:[tintColor CGColor]];
-        [tintFilter setValue:tintFilterColor forKey:@"inputColor"];
+    CIContext *context   = [CIContext contextWithOptions:nil];
+    CIImage *sourceImage = [CIImage imageWithCGImage:theImage.CGImage];
+    
+    //Create a CIAffineClamp filter to remove the trasparent border around the image
+    CIFilter *affineClampFilter = [CIFilter filterWithName:@"CIAffineClamp"
+                                      keysAndValues:kCIInputImageKey, sourceImage, nil];
+    
+    //Create an output CIImage with the results
+    CIImage *affineClampOutput = [affineClampFilter valueForKey:kCIOutputImageKey];
+    
+    //Create a Blur Filter using the filter we pass in
+    CIFilter *blurFilter = [CIFilter filterWithName:blurFilterName
+                                             keysAndValues:kCIInputImageKey, affineClampOutput,
+                            @"inputRadius", blurLevel,nil];
+    
+    //Convert to a CGImageRef using the fromRect so we can make sure the filter is sized correctly
+    CGImageRef cgBlurImage = [context createCGImage:[blurFilter valueForKey:kCIOutputImageKey]
+                                       fromRect:[sourceImage extent]];
+ 
+    //Convert from a CGImageRef to a CIImage
+    //cOutputImage will be converted to a UIImage at the end of the method
+    CIImage *cOutputImage = [CIImage imageWithCGImage:cgBlurImage];
+    
+    //Do some cleanup
+    CGImageRelease(cgBlurImage);
+    
+    //Check if we need to add a tint filter
+    if(tintColor !=[UIColor clearColor]){
+   
+        //Create a tint filter
+        CIFilter *tintFilter = [CIFilter filterWithName:@"CIConstantColorGenerator"
+                                          keysAndValues:@"inputColor", [CIColor colorWithCGColor:[tintColor CGColor]],nil];
+
         CIImage* tintImage = [tintFilter valueForKey:kCIOutputImageKey];
         
-        //apply a multiply filter
-        CIFilter* filterm = [CIFilter filterWithName:@"CIMultiplyCompositing"];
-        [filterm setValue:tintImage forKey:kCIInputImageKey];
+        //Apply MultiyCompositing filter, this is needed so we can add the tint filter
+        CIFilter *multiCompFilter = [CIFilter filterWithName:@"CIMultiplyCompositing"
+                                          keysAndValues:kCIInputImageKey, tintImage,
+                             @"inputBackgroundImage",cOutputImage, nil];
         
-        [filterm setValue:blurImage forKey:@"inputBackgroundImage"];
-        blurImage  = [filterm valueForKey:kCIOutputImageKey];
+        //Output the results of everything into the multiOutput CIImage
+        CGImageRef cgmultiCompImage = [context createCGImage:[multiCompFilter valueForKey:kCIOutputImageKey]
+                                               fromRect:[sourceImage extent]];
+        
+        //Convert from a CGImageRef to a CIImage
+        cOutputImage = [CIImage imageWithCGImage:cgmultiCompImage];
+        //Do some cleanup
+        CGImageRelease(cgmultiCompImage);
         
     }
-    
-    CGImageRef cgImage = [context createCGImage:blurImage fromRect:[inputImage extent]];
-    UIImage* results = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return results;
+
+    //Convert from a CIImage to a UIImage and sent it out of our method
+    return [UIImage  imageWithCIImage:cOutputImage];
 }
 
 @end

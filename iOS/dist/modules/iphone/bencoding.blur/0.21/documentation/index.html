@@ -1,0 +1,328 @@
+<h1>Ti.BlurView</h1>
+
+<p>The Ti.BlurView project allows you to create a blur view using either the contents of a view or a provided image.</p>
+<p><img alt="Default" src="https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_background_demo.png" />
+<img alt="Default" src="https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_cropped_demo.png" />
+<img alt="Default" src="https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_tinted_cropped_demo.png" /></p>
+<h2>Before you start</h2>
+
+<ul>
+<li>This is an iOS native module designed to work with Titanium SDK 3.1.2.GA</li>
+<li>This will only work with iOS <b>6</b> or greater</li>
+<li>Before using this module you first need to install the package. If you need instructions on how to install a 3rd party module please read this installation guide.</li>
+</ul>
+<h2>Download the compiled release</h2>
+
+<p>Download the module from the <a href="https://github.com/benbahrenburg/Ti.BlurView/tree/master/iOS/dist">dist folder</a></p>
+<h2>Building from source?</h2>
+
+<p>If you are building from source you will need to do the following:</p>
+<p>Import the project into Xcode:</p>
+<ul>
+<li>Modify the titanium.xcconfig file with the path to your Titanium installation</li>
+<li>When running this project from Xcode you might run into a compile issue. If this is the case you will need to update the titanium.xcconfig to include your username. See the below for an example:
+~~~
+TITANIUM_SDK = /Users/benjamin/Library/Application Support/Titanium/mobilesdk/osx/$(TITANIUM_SDK_VERSION)
+~~~</li>
+</ul>
+<h2>Setup</h2>
+
+<ul>
+<li>Download the latest release from the releases folder ( or you can build it yourself )</li>
+<li>Install the ti.sq module. If you need help here is a "How To" <a href="https://wiki.appcelerator.org/display/guides/Configuring+Apps+to+Use+Modules">guide</a>. </li>
+<li>You can now use the module via the commonJS require method, example shown below.</li>
+</ul>
+<h2>Importing the module using require</h2>
+
+<pre><code>
+var mod = require('bencoding.blur');
+</code></pre>
+
+<h2>Creating a blur view</h2>
+
+<p>The Ti.BlurView supports a majority of the standard <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View">Ti.UI.View</a> properties.  The below listed properties are specific to the Ti.BlurView.</p>
+<p><b>Parameters</b></p>
+<p><b>blurLevel</b> (optional): float</p>
+<p>The blurLevel property sets how blurry the view is.  By default this value is 5.</p>
+<p><b>blurCroppedToRect</b> : Boolean</p>
+<p>The blurCroppedToRect property is a boolean value that determines if the Ti.BlurView should crop the image or view contents to the overlap area of the Ti.BlurView.  The blurCroppedToRect property is true by default.  If you want to do a blurred background view such as the Yahoo weather app you must set the blurCroppedToRect property to false.  See the below examples for details.</p>
+<p><b>This property will not take effect if updated after the viewToBlur or imageToBlur has rendered.</b></p>
+<p><b>blurTintColor</b> : String / Color</p>
+<p>The blurTintColor property is the color tint that should be apply as part of the blur process.  By default this is set to transparent.</p>
+<p><b>This property will not take effect if updated after the viewToBlur or imageToBlur has rendered.</b></p>
+<p><b>viewToBlur</b> : TiUIView</p>
+<p>The viewToBlur property contains a reference to the view who's contents you wish to display in the Ti.BlurView.</p>
+<p><b>IMPORTANT:</b>
+<em> The viewToBlur should not be called until the referencing view has been rendered. It is recommended this value is set on a window "open" event or other method that ensures the view to be used will be attahed and rendered to the screen first.
+</em> If you wish to change the blurCroppedToRect, blurTintColor, or blurFilter you must do so before setting this property.</p>
+<p><b>imageToBlur</b> :  Url to image</p>
+<p>The imageToBlur property is the url to an image that will be used as to be blurred for display in the Ti.BlurView.  Unlike the viewToBlur property the imageToBlur property can be set before the window has fully rendered.</p>
+<p><b>IMPORTANT:</b>
+<em> Remember by default the image provided will be cropped as an overlay using the Ti.BlurView's frame. If this is not the desired effect set blurCroppedToRect to false.
+</em> If you wish to change the blurCroppedToRect, blurTintColor, or blurFilter you must do so before setting this property.</p>
+<p><b>blurFilter</b> :  String</p>
+<p>The blurFilter property sets which filter is used during the bend process.  By default this is set to CIGaussianBlur. </p>
+<p>Other valid values would be CIBoxBlur:
+ - CIDiscBlur
+ - CIGaussianBlur
+ - CIMotionBlur
+ - CIZoomBlur</p>
+<h3>Examples</h3>
+
+<p>Please check the module's example folder or on <a href="https://github.com/benbahrenburg/Ti.BlurView/tree/master/iOS/example">github</a> for examples on how to use this module.</p>
+<p><b>Example - Blurred Background</b>
+<pre><code>
+var mod = require('bencoding.blur');</p>
+<p>var win = Ti.UI.createWindow({
+    backgroundColor:'blue'
+});</p>
+<p>var bgView = Ti.UI.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL,
+    backgroundImage:"42553_m.jpg"
+});
+win.add(bgView);</p>
+<p>var blurView = mod.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL, 
+    blurLevel:5, blurCroppedToRect:false
+});
+bgView.add(blurView); <br />
+</p>
+<p>win.addEventListener('open',function(d){
+    blurView.viewToBlur = bgView;</p>
+<pre><code>var container = Ti.UI.createView({
+    backgroundColor:"#fff", borderRadius:20,
+    top:100, height:150, left:40, right:40
+});
+blurView.add(container);
+var label = Ti.UI.createLabel({
+    text:"Show how to blur like the yahoo weather app.", 
+    color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+}); 
+container.add(label);
+</code></pre>
+<p>});</p>
+<p>win.open();
+</code></pre></p>
+<p><b>Example - Blurred and Tinted Background</b>
+<pre><code>
+var mod = require('bencoding.blur');</p>
+<p>var win = Ti.UI.createWindow({
+    backgroundColor:'blue'
+});</p>
+<p>var bgView = Ti.UI.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL,
+    backgroundImage:"42553_m.jpg"
+});
+win.add(bgView);</p>
+<p>var blurView = mod.createView({
+    top:100, left:40, right:40, bottom:100, 
+    blurLevel:5, blurTintColor:"#9EDEB8", blurCroppedToRect:false
+});
+bgView.add(blurView); <br />
+</p>
+<p>win.addEventListener('open',function(d){</p>
+<pre><code>blurView.viewToBlur = bgView;
+
+var container = Ti.UI.createView({
+    backgroundColor:"#fff", borderRadius:20,
+    top:100, height:150, left:40, right:40
+});
+blurView.add(container);
+var label = Ti.UI.createLabel({
+    text:"BlurView Tinted background", 
+    color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+}); 
+container.add(label);
+</code></pre>
+<p>});</p>
+<p>win.open();</p>
+<p></code></pre>
+<b>Example - Blurred Overlay</b>
+<pre><code>
+var mod = require('bencoding.blur');
+var win = Ti.UI.createWindow({
+    backgroundColor:'blue'
+});</p>
+<p>var bgView = Ti.UI.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL,
+    backgroundImage:"42553_m.jpg"
+});
+win.add(bgView);</p>
+<p>var blurView = mod.createView({
+    top:100, left:40, right:40, bottom:100, 
+    blurLevel:5, blurCroppedToRect:true
+});
+bgView.add(blurView); <br />
+</p>
+<p>win.addEventListener('open',function(d){</p>
+<pre><code>blurView.viewToBlur = bgView;
+
+var container = Ti.UI.createView({
+    backgroundColor:"#fff", borderRadius:20,
+    top:100, height:150, left:10, right:10
+});
+blurView.add(container);
+
+var label = Ti.UI.createLabel({
+    text:"BlurView Cropped to view size", 
+    color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+}); 
+container.add(label);
+</code></pre>
+<p>});</p>
+<p>win.open();
+</code></pre></p>
+<p><b>Example - Blurred and Tinted Overlay</b>
+<pre><code>
+    var mod = require('bencoding.blur');</p>
+<p>var win = Ti.UI.createWindow({
+    backgroundColor:'blue'
+});</p>
+<p>var bgView = Ti.UI.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL,
+    backgroundImage:"42553_m.jpg"
+});
+win.add(bgView);</p>
+<p>var blurView = mod.createView({
+    top:100, left:40, right:40, bottom:100, 
+    blurLevel:5, blurTintColor:"#9EDEB8", blurCroppedToRect:true
+});
+bgView.add(blurView); <br />
+</p>
+<p>win.addEventListener('open',function(d){</p>
+<pre><code>blurView.viewToBlur = bgView;
+
+var container = Ti.UI.createView({
+    backgroundColor:"#fff", borderRadius:20,
+    top:100, height:150, left:10, right:10
+});
+blurView.add(container);
+var label = Ti.UI.createLabel({
+    text:"BlurView Tinted\nand Cropped", 
+    color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+}); 
+container.add(label);
+</code></pre>
+<p>});</p>
+<p>win.open();
+</code></pre></p>
+<h2>Doing a blur without the view</h2>
+
+<p>If you need a greater level of control you can use the applyBlurTo method to perform the image operations yourself.</p>
+<h3>applyBlurTo</h3>
+
+<p>The applyBlurTo method takes a dictionary with the following fields.</p>
+<p><b>Fields</b></p>
+<p><b>blurLevel</b> (optional): float</p>
+<p>The blurLevel property sets how blurry the view is.  By default this value is 5.</p>
+<p><b>cropToRect</b> : Dictionary</p>
+<p>The cropToRect parameter is a dictionary containing the x,y,width, and height values the provided object should be cropped to.</p>
+<p><b>This property will not take effect if updated after the viewToBlur or imageToBlur has rendered.</b></p>
+<p><b>blurTintColor</b> : String / Color</p>
+<p>The blurTintColor parameter is the color tint that should be apply as part of the blur process.  By default this is set to transparent.</p>
+<p><b>This parameter will not take effect if updated after the viewToBlur or imageToBlur has rendered.</b></p>
+<p><b>viewToBlur</b> : TiUIView</p>
+<p>The viewToBlur parameter contains a reference to the view who's contents you wish to have an image generated from.</p>
+<p><b>imageToBlur</b> :  Url to image</p>
+<p>The imageToBlur parameter is the url to an image that will be used in the blur process.</p>
+<p><b>blobToBlur</b> : TiBlob</p>
+<p>The blobToBlur parameter is the blob image you wish to have used in the blur process.  This is commonly created by calling the toImage() method on the view you wish to blur.</p>
+<p><b>blurFilter</b> :  String</p>
+<p>The blurFilter property sets which filter is used during the bend process.  By default this is set to CIGaussianBlur. </p>
+<p>Other valid values would be CIBoxBlur:
+ - CIDiscBlur
+ - CIGaussianBlur
+ - CIMotionBlur
+ - CIZoomBlur</p>
+<p><b>Example - Blurred Background</b>
+<pre><code>
+var mod = require('bencoding.blur');</p>
+<p>var win = Ti.UI.createWindow({
+    backgroundColor:'blue'
+});</p>
+<p>var bgView = Ti.UI.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL,
+    backgroundImage:"42553_m.jpg"
+});
+win.add(bgView);</p>
+<p>var imgView = Ti.UI.createImageView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL, 
+});
+bgView.add(imgView);  <br />
+</p>
+<p>win.addEventListener('open',function(d){</p>
+<pre><code>var img = mod.applyBlurTo({
+    blobToBlur: bgView.toImage(),
+    blurLevel:5, blurTintColor:"#9EDEB8"
+});
+
+imgView.image = img;
+
+var container = Ti.UI.createView({
+    backgroundColor:"#fff", borderRadius:20,
+    top:100, height:150, left:40, right:40
+});
+imgView.add(container);
+var label = Ti.UI.createLabel({
+    text:"Show how to blur like the yahoo weather app.", 
+    color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+}); 
+container.add(label);
+</code></pre>
+<p>});</p>
+<p>win.open();</p>
+<p></code></pre></p>
+<p><b>Example - Blurred Cropped Overlay</b>
+<pre><code>
+var mod = require('bencoding.blur');</p>
+<p>var win = Ti.UI.createWindow({
+    backgroundColor:'blue'
+});</p>
+<p>var bgView = Ti.UI.createView({
+    height:Ti.UI.FILL, width:Ti.UI.FILL,
+    backgroundImage:"42553_m.jpg"
+});
+win.add(bgView);</p>
+<p>var imgView = Ti.UI.createImageView({
+    top:100, left:40, right:40, bottom:100
+});
+bgView.add(imgView);  <br />
+</p>
+<p>win.addEventListener('open',function(d){</p>
+<pre><code>var img = mod.applyBlurTo({
+    blobToBlur: bgView.toImage(),
+    blurLevel:5, blurTintColor:"#9EDEB8",
+    cropToRect:{
+        x:bgView.rect.x,
+        y:bgView.rect.y,
+        width:bgView.rect.width,
+        height:bgView.rect.height
+    }
+});
+
+imgView.image = img;
+
+var container = Ti.UI.createView({
+    backgroundColor:"#fff", borderRadius:20,
+    top:100, height:150, left:40, right:40
+});
+imgView.add(container);
+var label = Ti.UI.createLabel({
+    text:"Show how to blur like the yahoo weather app.", 
+    color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+}); 
+container.add(label);
+</code></pre>
+<p>});</p>
+<p>win.open();
+</code></pre></p>
+<h3>Twitter</h3>
+
+<p>If you like the Titanium module,please consider following the <a href="http://www.twitter.com/benCoding">@benCoding Twitter</a> for updates.</p>
+<h3>Blog</h3>
+
+<p>For module updates, Titanium tutorials and more please check out my blog at <a href="http://benCoding.com">benCoding.Com</a>.</p>
+<h3>Attribution</h3>
+
+<p>The Blur method was inspired by the CoreImage tutorial by Evan Davis <a href="http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks">here</a>.</p>
+<p>The image used in all of the examples is by <a href="http://www.flickr.com/people/thenails1/">thenails</a> and is licenced under Creative Commons. This image is and associated licensing is available <a href="http://ny-pictures.com/nyc/photo/picture/42553/nostalgic_view_famous_hall">here</a>.</p>

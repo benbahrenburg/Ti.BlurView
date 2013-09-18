@@ -22,6 +22,10 @@ If you are building from source you will need to do the following:
 Import the project into Xcode:
 
 * Modify the titanium.xcconfig file with the path to your Titanium installation
+* When running this project from Xcode you might run into a compile issue. If this is the case you will need to update the titanium.xcconfig to include your username. See the below for an example:
+~~~
+TITANIUM_SDK = /Users/benjamin/Library/Application Support/Titanium/mobilesdk/osx/$(TITANIUM_SDK_VERSION)
+~~~
 
 <h2>Setup</h2>
 
@@ -389,6 +393,6 @@ For module updates, Titanium tutorials and more please check out my blog at [ben
 
 <h3>Attribution</h3>
 
-The Blur method uses CoreImage in the fashion detailed by Evan Davis [here](http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks).
+The Blur method was inspired by the CoreImage tutorial by Evan Davis [here](http://evandavis.me/blog/2013/2/13/getting-creative-with-calayer-masks).
 
 The image used in all of the examples is by [thenails](http://www.flickr.com/people/thenails1/) and is licenced under Creative Commons. This image is and associated licensing is available [here](http://ny-pictures.com/nyc/photo/picture/42553/nostalgic_view_famous_hall).

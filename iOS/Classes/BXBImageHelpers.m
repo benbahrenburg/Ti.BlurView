@@ -7,8 +7,45 @@
 
 #import "BXBImageHelpers.h"
 #import <CoreImage/CoreImageDefines.h>
+#import "ImageLoader.h"
+
 
 @implementation BXBImageHelpers
+
+-(UIImage*)rotatedImage:(UIImage*)originalImage withProxy:(TiProxy*)proxy
+{
+    //If autorotate is set to false and the image orientation is not UIImageOrientationUp create new image
+    if (![TiUtils boolValue:[proxy valueForUndefinedKey:@"autorotate"] def:YES] && (originalImage.imageOrientation != UIImageOrientationUp)) {
+        UIImage* theImage = [UIImage imageWithCGImage:[originalImage CGImage] scale:[originalImage scale] orientation:UIImageOrientationUp];
+        return theImage;
+    }
+    else {
+        return originalImage;
+    }
+}
+
+-(UIImage*)convertToUIImage:(id)arg withProxy:(TiProxy*)proxy
+{
+    UIImage *image = nil;
+    
+    if ([arg isKindOfClass:[TiBlob class]]) {
+        TiBlob *blob = (TiBlob*)arg;
+        image = [blob image];
+    }
+    else if ([arg isKindOfClass:[TiFile class]]) {
+        TiFile *file = (TiFile*)arg;
+        NSURL * fileUrl = [NSURL fileURLWithPath:[file path]];
+        image = [[ImageLoader sharedLoader] loadImmediateImage:fileUrl];
+    }
+    else if ([arg isKindOfClass:[UIImage class]]) {
+		// called within this class
+        image = (UIImage*)arg;
+    }
+    
+    UIImage *imageToUse = [self rotatedImage:image withProxy:proxy];
+    
+    return imageToUse;
+}
 
 - (UIImage *)imageCroppedToRect:(CGRect)rect theImage:(UIImage*)theImage
 {

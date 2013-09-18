@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.21
+version: 0.22
 apiversion: 2
 description: BlurView implementation for Titanium
 author: Benjamin Bahrenburg

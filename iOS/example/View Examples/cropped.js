@@ -18,14 +18,17 @@ win.add(bgView);
 
 var blurView = mod.createView({
 	top:100, left:40, right:40, bottom:100, 
-	blurLevel:5, blurTintColor:"#9EDEB8", blurCroppedToRect:true
+	blurLevel:5, blurCroppedToRect:true
 });
 bgView.add(blurView);	
 
 
+blurView.addEventListener('onPresent',function(d){
+	Ti.API.info('onPresent fired');
+	blurView.backgroundImage = bgView;
+});
+
 win.addEventListener('open',function(d){
-	
-	blurView.viewToBlur = bgView;
 	
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
@@ -33,7 +36,7 @@ win.addEventListener('open',function(d){
 	});
 	blurView.add(container);
 	var label = Ti.UI.createLabel({
-		text:"BlurView Tinted\nand Cropped", 
+		text:"BlurView Cropped to view size", 
 		color:"#000", width:Ti.UI.FILL,
 		height:50, textAlign:"center"
 	});	

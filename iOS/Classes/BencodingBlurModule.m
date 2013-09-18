@@ -74,24 +74,30 @@
     
     NSString *filterName = @"CIGaussianBlur";
     UIImage *workingImg = nil;
+    BXBImageHelpers* helper = [[BXBImageHelpers alloc] init];
     
-    if([args objectForKey:@"imageToBlur"] !=nil){
-        NSString *imgUrl = [TiUtils stringValue:@"imageToBlur" properties:args];
-        NSURL *url = [TiUtils toURL:imgUrl proxy:self];
-        workingImg = [[ImageLoader sharedLoader] loadImmediateImage:url];
+    if([args objectForKey:@"image"] !=nil){
+        workingImg = [helper convertToUIImage:[args objectForKey:@"image"] withProxy:self];
+        if(workingImg==nil){
+            NSURL* imageURL = [self sanitizeURL:[args objectForKey:@"image"]];
+            if (![imageURL isKindOfClass:[NSURL class]]) {
+                [self throwException:@"invalid image type"
+                           subreason:[NSString stringWithFormat:@"expected TiBlob, String, TiFile, was: %@",[args class]]
+                            location:CODELOCATION];
+            }
+            if ([imageURL isFileURL]) {
+                workingImg = [UIImage imageWithContentsOfFile:[imageURL path]];
+                if (workingImg == nil) {
+                    workingImg = [[ImageLoader sharedLoader] loadImmediateImage:imageURL];
+                }
+            }
+        }
     }
 
-    if([args objectForKey:@"blobToBlur"] !=nil){
-        id blob = [args objectForKey:@"blobToBlur"];
-        ENSURE_TYPE(blob,TiBlob);
-        workingImg = [(TiBlob*)blob image];
-    }
-
-    if([args objectForKey:@"viewToBlur"] !=nil){
-        id viewToBlur = [args objectForKey:@"viewToBlur"];
+    if([args objectForKey:@"view"] !=nil){
+        id viewToBlur = [args objectForKey:@"view"];
         ENSURE_TYPE(viewToBlur,TiViewProxy);
-        TiBlob* blobImage = [viewToBlur toImage:nil];
-        workingImg = [blobImage image];
+        workingImg = [[viewToBlur toImage:nil] image];
     }
     
     if(workingImg==nil){
@@ -111,8 +117,6 @@
     if([args objectForKey:@"blurFilter"] !=nil){
         filterName = [TiUtils stringValue:@"blurFilter" properties:args];
     }
-    
-    BXBImageHelpers* helper = [[BXBImageHelpers alloc] init];
     
     id rectValue = [args objectForKey:@"cropToRect"];
     

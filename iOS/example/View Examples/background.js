@@ -19,13 +19,14 @@ win.add(bgView);
 var blurView = mod.createView({
 	height:Ti.UI.FILL,
 	width:Ti.UI.FILL, 
-	blurLevel:5, blurCroppedToRect:false
+	blurLevel:5, 
+	blurCroppedToRect:false,
+	backgroundView:bgView
 });
 bgView.add(blurView);	
 
 
 win.addEventListener('open',function(d){
-	blurView.viewToBlur = bgView;
 	
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,

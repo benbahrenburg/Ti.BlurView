@@ -10,4 +10,8 @@
 @interface BencodingBlurViewProxy : TiViewProxy {
 }
 
+-(void)clearContents:(id)unused;
+-(void)tryRefresh:(id)unused;
+-(void)startLiveBlur:(id)args;
+-(void)stopLiveBlur:(id)unused;
 @end

@@ -7,8 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "TiUtils.h"
 @interface BXBImageHelpers : NSObject
 
+-(UIImage*)rotatedImage:(UIImage*)originalImage withProxy:(TiProxy*)proxy;
+-(UIImage*)convertToUIImage:(id)arg withProxy:(TiProxy*)proxy;
 - (UIImage *)imageCroppedToRect:(CGRect)rect theImage:(UIImage*)theImage;
 -(UIImage*) applyBlur :(UIImage*)theImage
              withFilter:(NSString*)blurFilterName

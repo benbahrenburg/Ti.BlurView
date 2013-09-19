@@ -2,9 +2,7 @@
 
 The Ti.BlurView project allows you to create a blur view using either the contents of a view or a provided image.
 
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_background_demo.png)
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_cropped_demo.png)
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/iOS/blurview_tinted_cropped_demo.png)
+![Animation](https://raw.github.com/benbahrenburg/Ti.BlurView/master/Screenshots/ios_demo.gif)
 
 <h2>Before you start</h2>
 * This is an iOS native module designed to work with Titanium SDK 3.1.2.GA
@@ -23,6 +21,7 @@ Import the project into Xcode:
 
 * Modify the titanium.xcconfig file with the path to your Titanium installation
 * When running this project from Xcode you might run into a compile issue. If this is the case you will need to update the titanium.xcconfig to include your username. See the below for an example:
+
 ~~~
 TITANIUM_SDK = /Users/benjamin/Library/Application Support/Titanium/mobilesdk/osx/$(TITANIUM_SDK_VERSION)
 ~~~
@@ -41,7 +40,7 @@ var mod = require('bencoding.blur');
 <h2>Creating a blur view</h2>
 The Ti.BlurView supports a majority of the standard [Ti.UI.View](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View) properties.  The below listed properties are specific to the Ti.BlurView.
 
-<b>Parameters</b>
+<h3>Properties</h3>
 
 <b>blurLevel</b> (optional): float
 
@@ -59,17 +58,17 @@ The blurTintColor property is the color tint that should be apply as part of the
 
 <b>This property will not take effect if updated after the viewToBlur or imageToBlur has rendered.</b>
 
-<b>viewToBlur</b> : TiUIView
+<b>backgroundView</b> : TiUIView
 
-The viewToBlur property contains a reference to the view who's contents you wish to display in the Ti.BlurView.
+The backgroundView property contains a reference to the view who's contents you wish to display in the Ti.BlurView.
 
 <b>IMPORTANT:</b>
-* The viewToBlur should not be called until the referencing view has been rendered. It is recommended this value is set on a window "open" event or other method that ensures the view to be used will be attahed and rendered to the screen first.
+* If blurCroppedToRect is true (default setting) you will need to make sure the view referenced in backgroundView has rendered before setting this property.  This can be in the open event of the window.  You can also use the onPresent event of Ti.BlurView to perform this action.
 * If you wish to change the blurCroppedToRect, blurTintColor, or blurFilter you must do so before setting this property.
 
-<b>imageToBlur</b> :  Url to image
+<b>image</b> :  Url to image
 
-The imageToBlur property is the url to an image that will be used as to be blurred for display in the Ti.BlurView.  Unlike the viewToBlur property the imageToBlur property can be set before the window has fully rendered.
+The image property is the url to an image that will be used as to be blurred for display in the Ti.BlurView.  
 
 <b>IMPORTANT:</b>
 * Remember by default the image provided will be cropped as an overlay using the Ti.BlurView's frame. If this is not the desired effect set blurCroppedToRect to false.
@@ -84,6 +83,53 @@ Other valid values would be CIBoxBlur:
  - CIGaussianBlur
  - CIMotionBlur
  - CIZoomBlur
+
+
+<h3>Methods</h3>
+
+<b>tryRefresh</b> 
+
+The tryRefresh method, will resample the BlurView if references to the backgroundView or Image are still present.
+
+~~~
+
+blurView.tryRefresh();
+
+~~~
+
+<b>clearContents</b>
+
+The clearContents method, removes the contents of the BlurView
+
+~~~
+
+blurView.clearContents();
+
+~~~
+
+<h3>Events</h3>
+
+<b>onPresent</b> 
+
+The onPresent event is fired when the view is rendered or refreshed.  This is a good place to se the backgroundView you are using the blurCroppedToRect:true and the referencing view has not yet rendered to screen.
+
+~~~
+blurView.addEventListener('onPresent',function(d){
+	Ti.API.info('onPresent fired');
+	blurView.backgroundView = bgView;
+});
+~~~
+
+<b>onSizeChanged</b> 
+
+The onSizeChanged event is fired when the view is resized.  If you need to adjust the image or backgroundView you can use this event to resample.
+
+~~~
+blurView.addEventListener('onSizeChanged',function(d){
+	Ti.API.info('onPresent fired');
+	blurView.backgroundView = bgView;
+});
+~~~
 
 <h3>Examples</h3>
 Please check the module's example folder or on [github](https://github.com/benbahrenburg/Ti.BlurView/tree/master/iOS/example) for examples on how to use this module.
@@ -104,12 +150,12 @@ win.add(bgView);
 
 var blurView = mod.createView({
 	height:Ti.UI.FILL, width:Ti.UI.FILL, 
-	blurLevel:5, blurCroppedToRect:false
+	blurLevel:5, blurCroppedToRect:false,
+	backgroundView:bgView
 });
 bgView.add(blurView);	
 
 win.addEventListener('open',function(d){
-	blurView.viewToBlur = bgView;
 	
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
@@ -142,13 +188,12 @@ win.add(bgView);
 
 var blurView = mod.createView({
 	top:100, left:40, right:40, bottom:100, 
-	blurLevel:5, blurTintColor:"#9EDEB8", blurCroppedToRect:false
+	blurLevel:5, blurTintColor:"#9EDEB8", 
+	blurCroppedToRect:false, backgroundView:bgView
 });
 bgView.add(blurView);	
 
 win.addEventListener('open',function(d){
-	
-	blurView.viewToBlur = bgView;
 	
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
@@ -184,9 +229,12 @@ var blurView = mod.createView({
 });
 bgView.add(blurView);	
 
+blurView.addEventListener('onPresent',function(d){
+	Ti.API.info('onPresent fired');
+	blurView.backgroundView = bgView;
+});
+
 win.addEventListener('open',function(d){
-	
-	blurView.viewToBlur = bgView;
 	
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
@@ -220,13 +268,17 @@ win.add(bgView);
 
 var blurView = mod.createView({
 	top:100, left:40, right:40, bottom:100, 
-	blurLevel:5, blurTintColor:"#9EDEB8", blurCroppedToRect:true
+	blurLevel:5, blurTintColor:"#9EDEB8", 
+	blurCroppedToRect:true
 });
 bgView.add(blurView);	
 
+blurView.addEventListener('onPresent',function(d){
+	Ti.API.info('onPresent fired');
+	blurView.backgroundImage = bgView;
+});
+
 win.addEventListener('open',function(d){
-	
-	blurView.viewToBlur = bgView;
 	
 	var container = Ti.UI.createView({
 		backgroundColor:"#fff", borderRadius:20,
@@ -268,17 +320,13 @@ The blurTintColor parameter is the color tint that should be apply as part of th
 
 <b>This parameter will not take effect if updated after the viewToBlur or imageToBlur has rendered.</b>
 
-<b>viewToBlur</b> : TiUIView
+<b>view</b> : TiUIView
 
-The viewToBlur parameter contains a reference to the view who's contents you wish to have an image generated from.
+The view parameter contains a reference to the view who's contents you wish to have an image generated from.
 
-<b>imageToBlur</b> :  Url to image
+<b>image</b> :  Url to image
 
-The imageToBlur parameter is the url to an image that will be used in the blur process.
-
-<b>blobToBlur</b> : TiBlob
-
-The blobToBlur parameter is the blob image you wish to have used in the blur process.  This is commonly created by calling the toImage() method on the view you wish to blur.
+The image parameter is the url to an image that will be used in the blur process.
 
 <b>blurFilter</b> :  String
 
@@ -312,7 +360,7 @@ bgView.add(imgView);
 win.addEventListener('open',function(d){
 
 	var img = mod.applyBlurTo({
-		blobToBlur: bgView.toImage(),
+		image: bgView.toImage(),
 		blurLevel:5, blurTintColor:"#9EDEB8"
 	});
 
@@ -356,13 +404,13 @@ bgView.add(imgView);
 win.addEventListener('open',function(d){
 
 	var img = mod.applyBlurTo({
-		blobToBlur: bgView.toImage(),
+		view: bgView,
 		blurLevel:5, blurTintColor:"#9EDEB8",
 		cropToRect:{
-			x:bgView.rect.x,
-			y:bgView.rect.y,
-			width:bgView.rect.width,
-			height:bgView.rect.height
+			x:imgView.rect.x,
+			y:imgView.rect.y,
+			width:imgView.rect.width,
+			height:imgView.rect.height
 		}
 	});
 	

@@ -3,7 +3,6 @@
 The Ti.BlurView project allows you to create a blur view using either the contents of a view or a provided image.
 
 ![Animation](https://raw.github.com/benbahrenburg/Ti.BlurView/master/Screenshots/ios_demo.gif)
-![Default](https://raw.github.com/benbahrenburg/Ti.BlurView/master/Screenshots/ios_background_demo.png)
 
 <h2>Before you start</h2>
 * This is an iOS native module designed to work with Titanium SDK 3.1.2.GA
@@ -22,6 +21,7 @@ Import the project into Xcode:
 
 * Modify the titanium.xcconfig file with the path to your Titanium installation
 * When running this project from Xcode you might run into a compile issue. If this is the case you will need to update the titanium.xcconfig to include your username. See the below for an example:
+
 ~~~
 TITANIUM_SDK = /Users/benjamin/Library/Application Support/Titanium/mobilesdk/osx/$(TITANIUM_SDK_VERSION)
 ~~~

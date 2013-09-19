@@ -11,12 +11,6 @@
 	UIImageView *_blurView;
     NSNumber * _blurLevel;
     NSString * _blurFilter;
-    BOOL _cropToFit;
-    BOOL _debug;
-    UIColor *_blurTint;
-    TiViewProxy *_viewToBlur;
-    NSTimer* _blurTimer;
-    BXBImageHelpers* _helpers;
 }
 
 -(void)clearContents:(id)unused;

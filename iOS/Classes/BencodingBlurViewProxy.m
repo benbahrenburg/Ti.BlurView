@@ -14,6 +14,10 @@
 {
     return [NSArray arrayWithObjects:
             @"debug",
+            @"stopViewRebind",
+            @"rebindOnPresent",
+            @"rebindOnPresentDelay",
+            @"rebindOnResize",
             @"blurLevel",
             @"blurCroppedToRect",
             @"blurTintColor",

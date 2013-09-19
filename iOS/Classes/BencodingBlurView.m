@@ -12,11 +12,23 @@
 
 @implementation BencodingBlurView
 
+float _onPresentDelay = 100;
+BOOL _cropToFit =YES;
+BOOL _debug = NO;
+UIColor *_blurTint;
+TiViewProxy *_viewToBlur  = nil;
+NSTimer* _blurTimer;
+BXBImageHelpers* _helpers;
+BOOL _rebindOnPresent = NO;
+BOOL _rebindOnResize = NO;
+BOOL _stopViewRebind = NO;
 BOOL _rendered = NO;
-
 
 -(void)willMoveToSuperview:(UIView *)newSuperview
 {
+    
+    _rendered = YES;
+    
     if(_debug){
         NSLog(@"[DEBUG] onPresent - willMoveToSuperview");
     }
@@ -29,8 +41,36 @@ BOOL _rendered = NO;
         
 		[self.proxy fireEvent:@"onPresent" withObject:event];
 	}
+    
+    if((_rebindOnPresent)||(([self isViewBlur]) && (_stopViewRebind==NO))){
+        
+        if(_debug){
+            NSLog(@"[DEBUG] Rebinding onPresent");
+        }
+        
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, _onPresentDelay);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            if(_debug){
+                NSLog(@"[DEBUG] Rebinding onPresent Queue Executed");
+            }
+            [self tryRefresh:nil];
+        });
+    }
 }
 
+-(BOOL) isViewBlur
+{
+    
+    if(_viewToBlur!=nil){
+        return YES;
+    }
+    id bgView = [self.proxy valueForUndefinedKey:@"backgroundView"];
+    if(bgView!=nil){
+        return YES;
+    }
+    
+    return NO;
+}
 -(void)removeImage
 {
 	if (_blurView!=nil)
@@ -46,10 +86,6 @@ BOOL _rendered = NO;
     //Set our blur defaults
     _blurLevel = [NSNumber numberWithFloat:5.0f];
     _blurFilter = @"CIGaussianBlur";
-    _cropToFit = YES;
-    _rendered = NO;
-    _debug = NO;
-    _viewToBlur = nil;
     _blurTint = [UIColor clearColor];
     _helpers = [[BXBImageHelpers alloc] init];
 	[super initializeState];
@@ -90,6 +126,17 @@ BOOL _rendered = NO;
         return;
     }
     
+    id bgView = [self.proxy valueForUndefinedKey:@"backgroundView"];
+    
+    if(bgView!=nil)
+    {
+        if(_debug){
+            NSLog(@"[DEBUG] tryRefresh - setting setBackgroundView_");
+        }
+        [self setBackgroundView_:bgView];
+        return;
+    }
+    
     id currentImage = [self.proxy valueForUndefinedKey:@"image"];
     
     if(currentImage!=nil){
@@ -97,8 +144,8 @@ BOOL _rendered = NO;
         if(_debug){
             NSLog(@"[DEBUG] tryRefresh - image updated");
         }
+        return;
     }
-    
 }
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
@@ -120,6 +167,33 @@ BOOL _rendered = NO;
             [self.proxy fireEvent:@"onSizeChanged" withObject:event];
         }
 	}
+    
+    if(_rebindOnResize){
+        if(_debug){
+            NSLog(@"[DEBUG] trying to rebind on resize");
+        }
+        [self tryRefresh:nil];
+    }
+}
+
+
+-(void) setStopViewRebind_:(id)value
+{
+    _stopViewRebind =[TiUtils boolValue:value def:NO];
+}
+-(void) setRebindOnPresentDelay_:(id)value
+{
+    _onPresentDelay =[TiUtils floatValue:value def:100];
+}
+
+-(void) setRebindOnResize_:(id)value
+{
+    _rebindOnResize =[TiUtils boolValue:value def:NO];
+}
+
+-(void) setRebindOnPresent_:(id)value
+{
+    _rebindOnPresent =[TiUtils boolValue:value def:NO];
 }
 
 -(void) setDebug_:(id)value
@@ -149,11 +223,18 @@ BOOL _rendered = NO;
     _blurLevel =[NSNumber numberWithDouble:[TiUtils doubleValue:value def:5.0]];
 }
 
--(void) setBackgroundView_:(id)viewProxy
+-(void)setBackgroundView_:(id)viewProxy
 {
     ENSURE_SINGLE_ARG(viewProxy, TiViewProxy);
-
+    
     _viewToBlur = viewProxy;
+    
+    if(_rendered==NO){
+        if(_debug){
+            NSLog(@"[DEBUG] BlurView not rendered yet, waiting until willMoveToSuperview");
+        }
+        return;
+    }
     
     [self removeImage];
     

@@ -2,6 +2,7 @@
 
 The Ti.BlurView project allows you to create a blur view using either the contents of a view or a provided image.
 
+Below is a gif showing the example app in action. For a more complete walk through see the [video](http://www.youtube.com/watch?v=mXU5dUkibls)
 ![Animation](https://raw.github.com/benbahrenburg/Ti.BlurView/master/Screenshots/ios_demo.gif)
 
 <h2>Before you start</h2>

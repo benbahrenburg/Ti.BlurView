@@ -34,6 +34,10 @@
 		43A14F0A17E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A14F0817E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m */; };
 		43A14F1417E4F21200EE1BA0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A14F1317E4F21200EE1BA0 /* QuartzCore.framework */; };
 		43A14F1617E4FBAC00EE1BA0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A14F1517E4FBAC00EE1BA0 /* Accelerate.framework */; };
+		43B8F1A717EC17CC0053A8E6 /* BencodingBlurGlassView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B8F1A517EC17CC0053A8E6 /* BencodingBlurGlassView.h */; };
+		43B8F1A817EC17CC0053A8E6 /* BencodingBlurGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B8F1A617EC17CC0053A8E6 /* BencodingBlurGlassView.m */; };
+		43B8F1AB17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B8F1A917EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h */; };
+		43B8F1AC17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B8F1AA17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m */; };
 		AA747D9F0F9514B9006C5449 /* BencodingBlur_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* BencodingBlur_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +66,10 @@
 		43A14F0817E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurViewProxy.m; path = Classes/BencodingBlurViewProxy.m; sourceTree = "<group>"; };
 		43A14F1317E4F21200EE1BA0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43A14F1517E4FBAC00EE1BA0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		43B8F1A517EC17CC0053A8E6 /* BencodingBlurGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurGlassView.h; path = Classes/BencodingBlurGlassView.h; sourceTree = "<group>"; };
+		43B8F1A617EC17CC0053A8E6 /* BencodingBlurGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurGlassView.m; path = Classes/BencodingBlurGlassView.m; sourceTree = "<group>"; };
+		43B8F1A917EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurGlassViewProxy.h; path = Classes/BencodingBlurGlassViewProxy.h; sourceTree = "<group>"; };
+		43B8F1AA17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurGlassViewProxy.m; path = Classes/BencodingBlurGlassViewProxy.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* BencodingBlur_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BencodingBlur_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libBencodingBlur.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBencodingBlur.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +131,10 @@
 				43A14F0817E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m */,
 				433C24FE17E77503006EC39D /* BXBImageHelpers.h */,
 				433C24FF17E77503006EC39D /* BXBImageHelpers.m */,
+				43B8F1A517EC17CC0053A8E6 /* BencodingBlurGlassView.h */,
+				43B8F1A617EC17CC0053A8E6 /* BencodingBlurGlassView.m */,
+				43B8F1A917EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h */,
+				43B8F1AA17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -143,12 +155,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43B8F1AB17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* BencodingBlur_Prefix.pch in Headers */,
 				433C250017E77503006EC39D /* BXBImageHelpers.h in Headers */,
 				24DD6CF91134B3F500162E58 /* BencodingBlurModule.h in Headers */,
 				43A14F0917E4F0BE00EE1BA0 /* BencodingBlurViewProxy.h in Headers */,
 				43A14F0517E4F0A700EE1BA0 /* BencodingBlurView.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* BencodingBlurModuleAssets.h in Headers */,
+				43B8F1A717EC17CC0053A8E6 /* BencodingBlurGlassView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,8 +237,10 @@
 			files = (
 				24DD6CFA1134B3F500162E58 /* BencodingBlurModule.m in Sources */,
 				43A14F0617E4F0A700EE1BA0 /* BencodingBlurView.m in Sources */,
+				43B8F1AC17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m in Sources */,
 				43A14F0A17E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m in Sources */,
 				433C250117E77503006EC39D /* BXBImageHelpers.m in Sources */,
+				43B8F1A817EC17CC0053A8E6 /* BencodingBlurGlassView.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* BencodingBlurModuleAssets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

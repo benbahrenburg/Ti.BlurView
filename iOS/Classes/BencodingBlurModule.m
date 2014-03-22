@@ -1,6 +1,6 @@
 /**
  * benCoding.BlurView
- * Copyright (c) 2013 by Benjamin Bahrenburg. All Rights Reserved.
+ * Copyright (c) 2014 by Benjamin Bahrenburg. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -136,4 +136,14 @@
     return results ? [[TiBlob alloc] initWithImage:results] : nil;
     
 }
+
+NSString * const kBBIOSBlur = @"IOS_BLUR";
+NSString * const kBBBoxBlur = @"BOX_BLUR";
+NSString * const kBBGaussianBlur = @"GAUSSIAN_BLUR";
+
+
+MAKE_SYSTEM_STR(IOS_BLUR, kBBIOSBlur);
+MAKE_SYSTEM_STR(BOX_BLUR, kBBBoxBlur);
+MAKE_SYSTEM_STR(GAUSSIAN_BLUR, kBBGaussianBlur);
+
 @end

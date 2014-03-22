@@ -1,6 +1,6 @@
 /**
  * benCoding.BlurView
- * Copyright (c) 2013 by Benjamin Bahrenburg. All Rights Reserved.
+ * Copyright (c) 2014 by Benjamin Bahrenburg. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -53,21 +53,5 @@
     [self replaceValue:image forKey:@"image" notification:YES];
 }
 
--(void)startLiveBlur:(id)args
-{
-    ENSURE_SINGLE_ARG(args,NSDictionary)
-  	if ([self viewAttached])
-	{
-		TiThreadPerformOnMainThread(^{[(BencodingBlurView*)[self view] startLiveBlur:args];}, NO);
-	}
-}
-
--(void)stopLiveBlur:(id)unused
-{
-  	if ([self viewAttached])
-	{
-		TiThreadPerformOnMainThread(^{[(BencodingBlurView*)[self view] stopLiveBlur:unused];}, NO);
-	}
-}
 
 @end

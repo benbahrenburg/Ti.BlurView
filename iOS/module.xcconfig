@@ -1,1 +1,1 @@
-OTHER_LDFLAGS=$(inherited) -framework QuartzCore -framework Accelerate -framework CoreImage
+OTHER_LDFLAGS=$(inherited) -framework CoreMedia -framework CoreVideo -framework OpenGLES -framework AVFoundation -framework QuartzCore -framework Accelerate -framework CoreImage

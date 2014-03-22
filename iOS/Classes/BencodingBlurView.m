@@ -1,6 +1,6 @@
 /**
  * benCoding.BlurView
- * Copyright (c) 2013 by Benjamin Bahrenburg. All Rights Reserved.
+ * Copyright (c) 2014 by Benjamin Bahrenburg. All Rights Reserved.
  * Licensed under the terms of the Apache Public License
  * Please see the LICENSE included with this distribution for details.
  */
@@ -12,18 +12,6 @@
 
 @implementation BencodingBlurView
 
-float _onPresentDelay = 100;
-BOOL _cropToFit =YES;
-BOOL _debug = NO;
-UIColor *_blurTint;
-TiViewProxy *_viewToBlur  = nil;
-NSTimer* _blurTimer;
-BXBImageHelpers* _helpers;
-BOOL _rebindOnPresent = NO;
-BOOL _rebindOnResize = NO;
-BOOL _stopViewRebind = NO;
-BOOL _rendered = NO;
-
 -(void)willMoveToSuperview:(UIView *)newSuperview
 {
     
@@ -32,7 +20,7 @@ BOOL _rendered = NO;
     if(_debug){
         NSLog(@"[DEBUG] onPresent - willMoveToSuperview");
     }
-    
+
     if ([self.proxy _hasListeners:@"onPresent"]) {
 		NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
 							   @"presented",@"action",
@@ -81,9 +69,18 @@ BOOL _rendered = NO;
 
 -(void)initializeState
 {
+    _debug = NO;
+    _onPresentDelay = 100;
+    _cropToFit =YES;
+    _rebindOnPresent = NO;
+    _rebindOnResize = NO;
+    _stopViewRebind = NO;
+    _rendered = NO;
+
     //This is alittle hacky but, on init create and add our view
     [self blurView];
     //Set our blur defaults
+
     _blurLevel = [NSNumber numberWithFloat:5.0f];
     _blurFilter = @"CIGaussianBlur";
     _blurTint = [UIColor clearColor];
@@ -93,7 +90,6 @@ BOOL _rendered = NO;
 
 -(void)dealloc
 {
-    [self clearTimer];
 	_blurView = nil;
     _blurTint = nil;
     _viewToBlur = nil;
@@ -250,31 +246,6 @@ BOOL _rendered = NO;
     [self setBackgroundView_:viewProxy];
 }
 
--(void)clearTimer
-{
-    if(_blurTimer!=nil){
-        [_blurTimer invalidate];
-        _blurTimer = nil;
-    }
-}
-
-- (void)timerElapsed
-{
-
-    if(_debug){
-        NSLog(@"[DEBUG] timerElapsed");
-    }
-    
-    [self tryRefresh:nil];
-    
-    if ([self.proxy _hasListeners:@"onLiveBlur"]) {
-        NSDictionary *timerEvent = [NSDictionary dictionaryWithObjectsAndKeys:@"liveBlur",@"action",
-                                    NUMBOOL(YES),@"success",nil];
-        
-        [self.proxy fireEvent:@"onLiveBlur" withObject:timerEvent];
-    }
-    
-}
 
 -(void)clearContents:(id)unused
 {
@@ -282,44 +253,6 @@ BOOL _rendered = NO;
     [self removeImage];
 }
 
--(void)startLiveBlur:(id)args
-{
-   
-    ENSURE_SINGLE_ARG(args,NSDictionary)
-    ENSURE_UI_THREAD(startLiveBlur,args);
-    
-    if(_debug){
-        NSLog(@"[DEBUG] startLiveBlur");
-    }
-    
-    float timerInterval = [TiUtils floatValue:@"interval" properties:args def:-1];
-    
-   [self clearTimer];
-    
-    if(timerInterval > 1){
-    
-        if(_debug){
-            NSLog(@"[DEBUG] Live Blur Interval Scheduled");
-        }
-    
-        _blurTimer = [NSTimer scheduledTimerWithTimeInterval:
-                                [[NSNumber numberWithFloat:timerInterval] doubleValue]
-                                                                target:self
-                                                              selector:@selector(timerElapsed)
-                                                              userInfo:nil
-                                                               repeats:YES];
-    }
-    
-}
-
--(void)stopLiveBlur:(id)unused
-{
-    ENSURE_UI_THREAD(stopLiveBlur,unused);
-    if(_debug){
-        NSLog(@"[DEBUG] stopLiveBlur");
-    }
-    [self clearTimer];
-}
 
 -(void) addImageToView:(UIImage*)theImage
 {

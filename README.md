@@ -52,19 +52,19 @@ var mod = require('bencoding.blur');
 
 The BlurView provides a series of methods you can use to implement a blur effect similar to that used in iOS 7.  The BlurView is an extended Ti.UI.View that implements a Blur effect and allows you to implement background clipping.
 
-To learn more about the BlurView please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/blob/master/BlurView.md).
+To learn more about the BlurView please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/tree/master/Documentation/BlurView.md).
 
 <h2>Blur GPUImageView</h2>
 
 The GPUBlurImageView allows you to implement a blur effect similar to that used in iOS 7.  The GPUBlurImageView ImageView uses the [Brad Larson](https://github.com/BradLarson) [GPUImage](https://github.com/BradLarson/GPUImage) project render the blur effect quickly using little device resources.
 
-To learn more about the GPUBlurImageView please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/blob/master/GPUBlurImageView.md).
+To learn more about the GPUBlurImageView please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/tree/master/Documentation/GPUBlurImageView.md).
 
 <h2>Doing a blur without the view</h2>
 
 Want to blur your images directly without using a View or ImageView? The applyGPUBlurTo and applyBlurTo methods allow you to do this quickly and easily.
 
-To learn more about how to apply the blur effect without using a view please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/blob/master/BlurImage.md).
+To learn more about how to apply the blur effect without using a view please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/tree/master/Documentation/BlurImage.md).
 
 
 <h3>Twitter</h3>

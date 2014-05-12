@@ -12,6 +12,7 @@
 #import "BXBImageHelpers.h"
 #import "ImageLoader.h"
 #import "TiUIViewProxy.h"
+#import "BXBGPUHelpers.h"
 @implementation BencodingBlurModule
 
 #pragma mark Internal
@@ -65,6 +66,70 @@
     return NUMBOOL(NO);
     
 #endif
+    
+}
+
+
+-(id) applyGPUBlurTo:(id)args
+{
+    ENSURE_SINGLE_ARG(args,NSDictionary);
+
+    NSString *filterType = kBBIOSBlur;
+    UIImage *workingImg = nil;
+    BOOL debug = [TiUtils boolValue:@"debug" properties:args def:NO];
+    BXBGPUHelpers *filterHelpers = [[BXBGPUHelpers alloc] initWithDetails:debug];
+    BXBImageHelpers* helper = [[BXBImageHelpers alloc] init];
+
+    if([args objectForKey:@"image"] !=nil){
+        workingImg = [helper convertToUIImage:[args objectForKey:@"image"] withProxy:self];
+        if(workingImg==nil){
+            NSURL* imageURL = [self sanitizeURL:[args objectForKey:@"image"]];
+            if (![imageURL isKindOfClass:[NSURL class]]) {
+                [self throwException:@"invalid image type"
+                           subreason:[NSString stringWithFormat:@"expected TiBlob, String, TiFile, was: %@",[args class]]
+                            location:CODELOCATION];
+            }
+            if ([imageURL isFileURL]) {
+                workingImg = [UIImage imageWithContentsOfFile:[imageURL path]];
+                if (workingImg == nil) {
+                    workingImg = [[ImageLoader sharedLoader] loadImmediateImage:imageURL];
+                }
+            }
+        }
+    }
+
+
+
+    if(args!=nil){
+        filterType = [TiUtils stringValue:@"type" properties:args def:kBBIOSBlur];
+    }
+
+    if([filterType  isEqual: kBBGaussianBlur]){
+        if(debug){
+            NSLog(@"[DEBUG] GPUBlurImageView: applying GPUImageGaussianBlurFilter");
+        }
+
+        workingImg =[[filterHelpers buildGaussianBlur:args] imageByFilteringImage:workingImg];
+    }
+
+    if([filterType  isEqual: kBBBoxBlur]){
+        if(debug){
+            NSLog(@"[DEBUG] GPUBlurImageView: applying GPUImageBoxBlurFilter");
+        }
+
+         workingImg =[[filterHelpers buildBoxBlur:args] imageByFilteringImage:workingImg];
+    }
+
+    if([filterType  isEqual: kBBIOSBlur]){
+        if(debug){
+            NSLog(@"[DEBUG] GPUBlurImageView: applying GPUImageiOSBlurFilter");
+        }
+
+        workingImg= [[filterHelpers buildIOSBlur:args] imageByFilteringImage:workingImg];
+    }
+
+
+    return workingImg ? [[TiBlob alloc] initWithImage:workingImg] : nil;
     
 }
 

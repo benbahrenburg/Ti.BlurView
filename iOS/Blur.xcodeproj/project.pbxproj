@@ -204,14 +204,6 @@
 		43A14F1617E4FBAC00EE1BA0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A14F1517E4FBAC00EE1BA0 /* Accelerate.framework */; };
 		43B47AF118DD43D500063D3C /* BXBGPUHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B47AEF18DD43D500063D3C /* BXBGPUHelpers.h */; };
 		43B47AF218DD43D500063D3C /* BXBGPUHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B47AF018DD43D500063D3C /* BXBGPUHelpers.m */; };
-		43B47AF918DD466B00063D3C /* BencodingBlurGPUBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B47AF718DD466B00063D3C /* BencodingBlurGPUBlurView.h */; };
-		43B47AFA18DD466B00063D3C /* BencodingBlurGPUBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B47AF818DD466B00063D3C /* BencodingBlurGPUBlurView.m */; };
-		43B47AFD18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B47AFB18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.h */; };
-		43B47AFE18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B47AFC18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.m */; };
-		43B8F1A717EC17CC0053A8E6 /* BencodingBlurGlassView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B8F1A517EC17CC0053A8E6 /* BencodingBlurGlassView.h */; };
-		43B8F1A817EC17CC0053A8E6 /* BencodingBlurGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B8F1A617EC17CC0053A8E6 /* BencodingBlurGlassView.m */; };
-		43B8F1AB17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 43B8F1A917EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h */; };
-		43B8F1AC17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B8F1AA17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m */; };
 		AA747D9F0F9514B9006C5449 /* BencodingBlur_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* BencodingBlur_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -410,14 +402,6 @@
 		43A14F1517E4FBAC00EE1BA0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		43B47AEF18DD43D500063D3C /* BXBGPUHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BXBGPUHelpers.h; path = Classes/BXBGPUHelpers.h; sourceTree = "<group>"; };
 		43B47AF018DD43D500063D3C /* BXBGPUHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BXBGPUHelpers.m; path = Classes/BXBGPUHelpers.m; sourceTree = "<group>"; };
-		43B47AF718DD466B00063D3C /* BencodingBlurGPUBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurGPUBlurView.h; path = Classes/BencodingBlurGPUBlurView.h; sourceTree = "<group>"; };
-		43B47AF818DD466B00063D3C /* BencodingBlurGPUBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurGPUBlurView.m; path = Classes/BencodingBlurGPUBlurView.m; sourceTree = "<group>"; };
-		43B47AFB18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurGPUBlurViewProxy.h; path = Classes/BencodingBlurGPUBlurViewProxy.h; sourceTree = "<group>"; };
-		43B47AFC18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurGPUBlurViewProxy.m; path = Classes/BencodingBlurGPUBlurViewProxy.m; sourceTree = "<group>"; };
-		43B8F1A517EC17CC0053A8E6 /* BencodingBlurGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurGlassView.h; path = Classes/BencodingBlurGlassView.h; sourceTree = "<group>"; };
-		43B8F1A617EC17CC0053A8E6 /* BencodingBlurGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurGlassView.m; path = Classes/BencodingBlurGlassView.m; sourceTree = "<group>"; };
-		43B8F1A917EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurGlassViewProxy.h; path = Classes/BencodingBlurGlassViewProxy.h; sourceTree = "<group>"; };
-		43B8F1AA17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurGlassViewProxy.m; path = Classes/BencodingBlurGlassViewProxy.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* BencodingBlur_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BencodingBlur_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libBencodingBlur.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBencodingBlur.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -471,8 +455,6 @@
 			isa = PBXGroup;
 			children = (
 				43740DB318DCFE9500D3155C /* GPUImage */,
-				43B47AF718DD466B00063D3C /* BencodingBlurGPUBlurView.h */,
-				43B47AF818DD466B00063D3C /* BencodingBlurGPUBlurView.m */,
 				24DE9E0F11C5FE74003F90F6 /* BencodingBlurModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* BencodingBlurModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* BencodingBlurModule.h */,
@@ -483,18 +465,12 @@
 				43A14F0817E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m */,
 				433C24FE17E77503006EC39D /* BXBImageHelpers.h */,
 				433C24FF17E77503006EC39D /* BXBImageHelpers.m */,
-				43B8F1A517EC17CC0053A8E6 /* BencodingBlurGlassView.h */,
 				43740EFE18DCFEF300D3155C /* BencodingBlurGPUBlurImageView.h */,
 				43740EFF18DCFEF300D3155C /* BencodingBlurGPUBlurImageView.m */,
-				43B8F1A617EC17CC0053A8E6 /* BencodingBlurGlassView.m */,
-				43B8F1A917EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h */,
-				43B8F1AA17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m */,
 				43740F0218DCFF1400D3155C /* BencodingBlurGPUBlurImageViewProxy.h */,
 				43740F0318DCFF1400D3155C /* BencodingBlurGPUBlurImageViewProxy.m */,
 				43B47AEF18DD43D500063D3C /* BXBGPUHelpers.h */,
 				43B47AF018DD43D500063D3C /* BXBGPUHelpers.m */,
-				43B47AFB18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.h */,
-				43B47AFC18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -708,7 +684,6 @@
 				43740F0018DCFEF300D3155C /* BencodingBlurGPUBlurImageView.h in Headers */,
 				43740EAB18DCFE9600D3155C /* GPUImageLuminanceThresholdFilter.h in Headers */,
 				43740E8118DCFE9600D3155C /* GPUImageErosionFilter.h in Headers */,
-				43B8F1AB17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.h in Headers */,
 				43740E7618DCFE9600D3155C /* GPUImageCropFilter.h in Headers */,
 				43740E5C18DCFE9600D3155C /* GPUImage3x3ConvolutionFilter.h in Headers */,
 				43740E5B18DCFE9600D3155C /* GPUImage.h in Headers */,
@@ -807,7 +782,6 @@
 				43740EBF18DCFE9600D3155C /* GPUImageOverlayBlendFilter.h in Headers */,
 				43740EEB18DCFE9600D3155C /* GPUImageTiltShiftFilter.h in Headers */,
 				43740ED818DCFE9600D3155C /* GPUImageSingleComponentGaussianBlurFilter.h in Headers */,
-				43B47AF918DD466B00063D3C /* BencodingBlurGPUBlurView.h in Headers */,
 				43740E6618DCFE9600D3155C /* GPUImageBrightnessFilter.h in Headers */,
 				43740ED718DCFE9600D3155C /* GPUImageShiTomasiFeatureDetectionFilter.h in Headers */,
 				43740E7318DCFE9600D3155C /* GPUImageColorPackingFilter.h in Headers */,
@@ -832,7 +806,6 @@
 				43740EA218DCFE9600D3155C /* GPUImageLaplacianFilter.h in Headers */,
 				43A14F0517E4F0A700EE1BA0 /* BencodingBlurView.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* BencodingBlurModuleAssets.h in Headers */,
-				43B47AFD18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.h in Headers */,
 				43740E9C18DCFE9600D3155C /* GPUImageHueFilter.h in Headers */,
 				43740EB418DCFE9600D3155C /* GPUImageMotionDetector.h in Headers */,
 				43740EA318DCFE9600D3155C /* GPUImageLevelsFilter.h in Headers */,
@@ -858,7 +831,6 @@
 				43740E7B18DCFE9600D3155C /* GPUImageDilationFilter.h in Headers */,
 				43740EDF18DCFE9600D3155C /* GPUImageSourceOverBlendFilter.h in Headers */,
 				43740EE518DCFE9600D3155C /* GPUImageTextureInput.h in Headers */,
-				43B8F1A717EC17CC0053A8E6 /* BencodingBlurGlassView.h in Headers */,
 				43740ED318DCFE9600D3155C /* GPUImageSaturationFilter.h in Headers */,
 				43740EAD18DCFE9600D3155C /* GPUImageLuminosityBlendFilter.h in Headers */,
 				43740E8B18DCFE9600D3155C /* GPUImageGammaFilter.h in Headers */,
@@ -953,13 +925,9 @@
 			files = (
 				24DD6CFA1134B3F500162E58 /* BencodingBlurModule.m in Sources */,
 				43A14F0617E4F0A700EE1BA0 /* BencodingBlurView.m in Sources */,
-				43B47AFE18DD46A600063D3C /* BencodingBlurGPUBlurViewProxy.m in Sources */,
-				43B8F1AC17EC17DB0053A8E6 /* BencodingBlurGlassViewProxy.m in Sources */,
 				43A14F0A17E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m in Sources */,
 				433C250117E77503006EC39D /* BXBImageHelpers.m in Sources */,
-				43B47AFA18DD466B00063D3C /* BencodingBlurGPUBlurView.m in Sources */,
 				43B47AF218DD43D500063D3C /* BXBGPUHelpers.m in Sources */,
-				43B8F1A817EC17CC0053A8E6 /* BencodingBlurGlassView.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* BencodingBlurModuleAssets.m in Sources */,
 				43740F0118DCFEF300D3155C /* BencodingBlurGPUBlurImageView.m in Sources */,
 				43740F0518DCFF1400D3155C /* BencodingBlurGPUBlurImageViewProxy.m in Sources */,

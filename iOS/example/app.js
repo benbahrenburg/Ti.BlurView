@@ -12,6 +12,9 @@ var data =[
 	{title:"applyBlurTo From Blob", hasChild:true, itemId:4},
 	{title:"Overlay applyBlurTo - View", hasChild:true, itemId:5},
 	{title:"Overlay applyBlurTo - Image", hasChild:true, itemId:6},
+	{title:"iOS Blur", hasChild:true, header:"GPU ImageView Demos", itemId:7},
+	{title:"Box Blur", hasChild:true, itemId:8},
+	{title:"Gaussian Blur", hasChild:true, itemId:9},
 ];
 var tableView = Ti.UI.createTableView({
 	width:Ti.UI.FILL, height:Ti.UI.FILL, data:data	
@@ -39,7 +42,16 @@ tableView.addEventListener('click',function(e){
 	}
 	if(e.rowData.itemId===6){
 		tabGroup.activeTab.open(require('image_overlay_image').createWindow());
-	}			
+	}	
+	if(e.rowData.itemId===7){
+		tabGroup.activeTab.open(require('GPU_Gaussian_Blur').createWindow());
+	}	
+	if(e.rowData.itemId===8){
+		tabGroup.activeTab.open(require('GPU_Box_Blur').createWindow());
+	}	
+	if(e.rowData.itemId===9){
+		tabGroup.activeTab.open(require('GPU_Box_Blur').createWindow());
+	}				
 });
 
 var tabGroup = Titanium.UI.createTabGroup();

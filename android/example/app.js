@@ -1,18 +1,30 @@
+//image sample provided by http://ny-pictures.com/nyc/photo/picture/42553/nostalgic_view_famous_hall
 
-
-var mod = require('bencoding.blur');
-Ti.API.info("module is => " + mod);
+var _imgBlur = require('image_blur_example'),
+	_basicBlur = require('basic_blur_view_example');
 
 // open a single window
 var win = Ti.UI.createWindow({
-	backgroundColor:'white', title:"Basic Blur Demo"
+	backgroundColor:'white', title:"Android Blur Demos"
 });
 
-var vwTest = mod.createBasicBlurImageView({
-	width:Ti.UI.FILL, height:Ti.UI.FILL, blurRadius:10,
-	image: '42553_m.jpg', backgroundColor:'red'
+var btnBasic = Ti.UI.createButton({
+	title:"Basic Blur Demo", 
+	left:10, right:10, height:65, top:45
 });
-win.add(vwTest);
+win.add(btnBasic);
+btnBasic.addEventListener('click',function(e){
+	_basicBlur.createWindow().open();
+});
+
+var btnImgBlur = Ti.UI.createButton({
+	title:"Image Blur Demo", 
+	left:10, right:10, height:65, top:150
+});
+win.add(btnImgBlur);
+btnImgBlur.addEventListener('click',function(e){
+	_imgBlur.createWindow().open();	
+});
 
 win.open();
 

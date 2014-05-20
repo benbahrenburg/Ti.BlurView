@@ -112,7 +112,7 @@ public class BlurviewModule extends KrollModule
 		//Apply Box blur
 		image = BoxBlur.blur((int) blurRadius, image);
 		
-		if(image !=null){
+		if(image == null){
 			Log.e(MODULE_FULL_NAME, "Unable to blur image, returning null");
 			return null;
 		}

@@ -97,8 +97,6 @@ Platform Supported: <b>iOS</b>
 
 <b>GAUSSIAN_BLUR</b> : Used in the blur type property of the GPUBlurImageView object.  Using a type of GAUSSIAN_BLUR implements A hardware-optimized, variable-radius Gaussian blur.
 
-<h2>Blur View</h2>
-
 <h3>Twitter</h3>
 
 If you like the Titanium module,please consider following the [@bencoding Twitter](http://www.twitter.com/bencoding) for updates.

@@ -26,6 +26,10 @@
 		24DD6CFA1134B3F500162E58 /* BencodingBlurModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* BencodingBlurModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* BencodingBlurModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* BencodingBlurModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* BencodingBlurModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* BencodingBlurModuleAssets.m */; };
+		4325C887192B97D5004DA7BF /* BencodingBlurBasicBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4325C885192B97D5004DA7BF /* BencodingBlurBasicBlurView.h */; };
+		4325C888192B97D5004DA7BF /* BencodingBlurBasicBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4325C886192B97D5004DA7BF /* BencodingBlurBasicBlurView.m */; };
+		4325C88B192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 4325C889192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.h */; };
+		4325C88C192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4325C88A192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.m */; };
 		433C250017E77503006EC39D /* BXBImageHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 433C24FE17E77503006EC39D /* BXBImageHelpers.h */; };
 		433C250117E77503006EC39D /* BXBImageHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 433C24FF17E77503006EC39D /* BXBImageHelpers.m */; };
 		43740E5A18DCFE9600D3155C /* GLProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = 43740DB518DCFE9500D3155C /* GLProgram.h */; };
@@ -224,6 +228,10 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* BencodingBlurModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurModuleAssets.h; path = Classes/BencodingBlurModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* BencodingBlurModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurModuleAssets.m; path = Classes/BencodingBlurModuleAssets.m; sourceTree = "<group>"; };
+		4325C885192B97D5004DA7BF /* BencodingBlurBasicBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurBasicBlurView.h; path = Classes/BencodingBlurBasicBlurView.h; sourceTree = "<group>"; };
+		4325C886192B97D5004DA7BF /* BencodingBlurBasicBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurBasicBlurView.m; path = Classes/BencodingBlurBasicBlurView.m; sourceTree = "<group>"; };
+		4325C889192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BencodingBlurBasicBlurViewProxy.h; path = Classes/BencodingBlurBasicBlurViewProxy.h; sourceTree = "<group>"; };
+		4325C88A192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BencodingBlurBasicBlurViewProxy.m; path = Classes/BencodingBlurBasicBlurViewProxy.m; sourceTree = "<group>"; };
 		433C24FE17E77503006EC39D /* BXBImageHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BXBImageHelpers.h; path = Classes/BXBImageHelpers.h; sourceTree = "<group>"; };
 		433C24FF17E77503006EC39D /* BXBImageHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BXBImageHelpers.m; path = Classes/BXBImageHelpers.m; sourceTree = "<group>"; };
 		43740DB518DCFE9500D3155C /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
@@ -471,6 +479,10 @@
 				43740F0318DCFF1400D3155C /* BencodingBlurGPUBlurImageViewProxy.m */,
 				43B47AEF18DD43D500063D3C /* BXBGPUHelpers.h */,
 				43B47AF018DD43D500063D3C /* BXBGPUHelpers.m */,
+				4325C885192B97D5004DA7BF /* BencodingBlurBasicBlurView.h */,
+				4325C886192B97D5004DA7BF /* BencodingBlurBasicBlurView.m */,
+				4325C889192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.h */,
+				4325C88A192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -756,6 +768,7 @@
 				43740E8718DCFE9600D3155C /* GPUImageFilterGroup.h in Headers */,
 				43740EE818DCFE9600D3155C /* GPUImageThresholdEdgeDetectionFilter.h in Headers */,
 				43740ED018DCFE9600D3155C /* GPUImageRGBFilter.h in Headers */,
+				4325C88B192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.h in Headers */,
 				43740EBE18DCFE9600D3155C /* GPUImageOutput.h in Headers */,
 				43740EE418DCFE9600D3155C /* GPUImageSwirlFilter.h in Headers */,
 				43740EF518DCFE9600D3155C /* GPUImageVideoCamera.h in Headers */,
@@ -833,6 +846,7 @@
 				43740EE518DCFE9600D3155C /* GPUImageTextureInput.h in Headers */,
 				43740ED318DCFE9600D3155C /* GPUImageSaturationFilter.h in Headers */,
 				43740EAD18DCFE9600D3155C /* GPUImageLuminosityBlendFilter.h in Headers */,
+				4325C887192B97D5004DA7BF /* BencodingBlurBasicBlurView.h in Headers */,
 				43740E8B18DCFE9600D3155C /* GPUImageGammaFilter.h in Headers */,
 				43740E9018DCFE9600D3155C /* GPUImageGrayscaleFilter.h in Headers */,
 				43740E7118DCFE9600D3155C /* GPUImageColorInvertFilter.h in Headers */,
@@ -923,7 +937,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4325C88C192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.m in Sources */,
 				24DD6CFA1134B3F500162E58 /* BencodingBlurModule.m in Sources */,
+				4325C888192B97D5004DA7BF /* BencodingBlurBasicBlurView.m in Sources */,
 				43A14F0617E4F0A700EE1BA0 /* BencodingBlurView.m in Sources */,
 				43A14F0A17E4F0BE00EE1BA0 /* BencodingBlurViewProxy.m in Sources */,
 				433C250117E77503006EC39D /* BXBImageHelpers.m in Sources */,

@@ -26,14 +26,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-public class BlurImageView extends TiUIView{
+public class BasicBlurImageView extends TiUIView{
 	// Standard Debugging variables
 	private static final String LCAT = BlurviewModule.MODULE_FULL_NAME;
 	private static final String PROPERTY_IMAGE = "image";
 	private static final String PROPERTY_BLUR_RADIUS = "blurRadius";
 	private float _blurRadius = 8f;
 	
-	public BlurImageView(TiViewProxy proxy) 
+	public BasicBlurImageView(TiViewProxy proxy) 
 	{
 		super(proxy);
 		TiCompositeLayout view = new TiCompositeLayout(proxy.getActivity());

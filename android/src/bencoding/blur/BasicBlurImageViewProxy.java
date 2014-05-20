@@ -21,16 +21,16 @@ import android.os.Handler;
 import android.os.Message;
 
 @Kroll.proxy(creatableInModule = BlurviewModule.class)
-public class BlurImageViewProxy extends TiViewProxy {
+public class BasicBlurImageViewProxy extends TiViewProxy {
 
-	public BlurImageViewProxy() {
+	public BasicBlurImageViewProxy() {
 		super();
 	}
 
 	@Override
 	public TiUIView createView(Activity activity) 
 	{
-		BlurImageView view = new BlurImageView(this);
+		BasicBlurImageView view = new BasicBlurImageView(this);
 		view.getLayoutParams().autoFillsHeight = true;
 		view.getLayoutParams().autoFillsWidth = true;
 		return view;
@@ -61,7 +61,7 @@ public class BlurImageViewProxy extends TiViewProxy {
 						switch (msg.what) {
 							case MSG_SET_BLUR_RADIUS: {
 								AsyncResult result = (AsyncResult) msg.obj;
-								BlurImageView sendView = (BlurImageView)view;
+								BasicBlurImageView sendView = (BasicBlurImageView)view;
 								sendView.setBlurRadius(input);
 								result.setResult(null);
 								return true;
@@ -71,7 +71,7 @@ public class BlurImageViewProxy extends TiViewProxy {
 					}
 				}).obtainMessage(MSG_SET_BLUR_RADIUS), input);
 			} else {
-				BlurImageView sendView = (BlurImageView)view;
+				BasicBlurImageView sendView = (BasicBlurImageView)view;
 				sendView.setBlurRadius(input);
 			}
 		}
@@ -89,7 +89,7 @@ public class BlurImageViewProxy extends TiViewProxy {
 						switch (msg.what) {
 							case MSG_SET_IMAGE: {
 								AsyncResult result = (AsyncResult) msg.obj;
-								BlurImageView sendView = (BlurImageView)view;
+								BasicBlurImageView sendView = (BasicBlurImageView)view;
 								sendView.setImage(input);
 								result.setResult(null);
 								return true;
@@ -99,7 +99,7 @@ public class BlurImageViewProxy extends TiViewProxy {
 					}
 				}).obtainMessage(MSG_SET_IMAGE), input);
 			} else {
-				BlurImageView sendView = (BlurImageView)view;
+				BasicBlurImageView sendView = (BasicBlurImageView)view;
 				sendView.setImage(input);
 			}
 		}

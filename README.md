@@ -82,9 +82,11 @@ Want to blur your images directly without using a View or ImageView?  The applyG
 
 <b>Android</b>
 
+Android documentation on how to apply a blur effect without using views, please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/blob/master/android/documentation/BlurImage.md).
+
 <b>iOS</b>
 
-To learn more about how to apply the blur effect without using a view please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/blob/master/iOS/documentation/BlurImage.md).
+For how to apply a blur effect on iOS without using views, please read the documentation [here](https://github.com/benbahrenburg/Ti.BlurView/blob/master/iOS/documentation/BlurImage.md).
 
 
 <h2>Module Properties</h2>

@@ -48,33 +48,30 @@ public class BlurviewModule extends KrollModule
 	}
 	
 	private Bitmap loadImage(Object inputImage){
-		Bitmap image = null;
 		try{
 			
 			if(inputImage instanceof TiBlob){
 				TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), (TiBlob) inputImage);
-				image = ref.getBitmap();
-			}else{
-		    	if(inputImage instanceof TiFile){	
-					TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), ((TiFile) inputImage).read());
-					image = ref.getBitmap();
-		    	}else{
-		    		if(inputImage instanceof FileProxy){
-						TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), ((FileProxy) inputImage).read());
-						image = ref.getBitmap();
-		    		}else{
-			    		if(inputImage instanceof TiBaseFile){
-							TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), ((TiBaseFile) inputImage).read());
-							image = ref.getBitmap();
-			    		}else{
-							TiDrawableReference ref = TiDrawableReference.fromUrl(getActivity(), (String) inputImage);
-							image = ref.getBitmap();
-			    		}	    			
-		    		}
-		    	}			
+				return ref.getBitmap();
 			}	
-			return image;
-			
+	    	if(inputImage instanceof TiFile){	
+				TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), ((TiFile) inputImage).read());
+				return ref.getBitmap();
+	    	}
+	    	
+    		if(inputImage instanceof FileProxy){
+				TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), ((FileProxy) inputImage).read());
+				return ref.getBitmap();
+    		}
+
+    		if(inputImage instanceof TiBaseFile){
+				TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), ((TiBaseFile) inputImage).read());
+				return ref.getBitmap();
+    		}
+    		
+			TiDrawableReference ref = TiDrawableReference.fromUrl(getActivity(), (String) inputImage);
+			return ref.getBitmap();
+
 		} catch (IOException e) {
 			Log.e(MODULE_FULL_NAME, e.getMessage());
 			e.printStackTrace();

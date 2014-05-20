@@ -4,7 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 /*
+ * The Box Blur code below is part the BlurTestAndroid project by patrickfav (https://github.com/patrickfav)
+ * 
  * https://github.com/patrickfav/BlurTestAndroid/blob/master/BlurBenchmark/src/main/java/at/favre/app/blurbenchmark/blur/algorithms/BoxBlur.java
+ * 
+ * The box blur algorithm was implemented using this post http://stackoverflow.com/questions/8218438/android-box-blur-algorithm
+ * 
  */
 public class BoxBlur {
 

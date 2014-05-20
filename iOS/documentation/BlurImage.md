@@ -1,5 +1,5 @@
-<h1>Image Blur</h1>
-How to use the Blur effects without using the BlurView or GPUBlurImageView.
+<h1>Image Blur - iOS</h1>
+How to use the Blur effects without using a view object.
 
 <h2>Doing a blur without the view</h2>
 If you need a greater level of control you can use the applyBlurTo method to perform the image operations yourself.
@@ -12,7 +12,7 @@ The applyBlurTo method takes a dictionary with the following fields.
 
 <b>blurLevel</b> (optional): float
 
-The blurLevel property sets how blurry the view is.  By default this value is 5.
+The blurLevel property sets how blurry the image is.  By default this value is 5.
 
 <b>cropToRect</b> : Dictionary
 

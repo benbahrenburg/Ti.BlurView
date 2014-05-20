@@ -1,57 +1,29 @@
-<h1>GPU Blur ImageView</h1>
-Details on how to use the GPU Blur ImageView.  The Blur ImageView uses the [GPUImage](https://github.com/BradLarson/GPUImage) project by [Brad Larson](https://github.com/BradLarson).
+<h1>BasicBlurView - Android</h1>
+Details on how to use the BasicBlurView.  
 
-<h2>Creating a GPU ImageView</h2>
-The Ti.GPUBlurImageView supports a majority of the standard [Ti.UI.ImageView](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.ImageView) properties.  The below listed properties are specific to the GPUBlurImageView.
+
+<h2>Creating a BasicBlurView</h2>
+The BasicBlurView extends a traditional [Ti.UI.View](http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.View) by providing two new properties, image and blurRadius.  Once these properties are set, the blur effect will be generated. 
+
+The below listed properties are specific to the BasicBlurView.
 
 <h3>Properties</h3>
 
-<b>blur</b> : Dictionary
-A dictionry containing the blur options
-*type : the type of GPU Blur effect to be used. Supported; IOS_BLUR, BOX_BLUR, GAUSSIAN_BLUR
-* radiusInPixels : amount of blur that should be applied
+<b>image</b> : String/Titanium.Blob/Titanium.Filesystem.File
 
-Optional options for IOS_BLUR:
-
-* saturation : Saturation ranges from 0.0 (fully desaturated) to 2.0 (max saturation), with 0.8 as the normal level
-* downsampling : The degree to which to downsample, then upsample the incoming image to minimize computations within the Gaussian blur, with a default of 4.0.
+Image to blur then display, defined using a local filesystem path, a File object, a remote URL, or a Blob object containing image data. Blob and File objects are not supported on Mobile Web.
 
 
-Optional options for BOX_BLUR and GAUSSIAN_BLUR
+<b>blurRadius</b> : Number
 
-* radiusAsFractionOfImageWidth :  Setting these properties will allow the blur radius to scale with the size of the image
-* radiusAsFractionOfImageHeight :  Setting these properties will allow the blur radius to scale with the size of the image
-* passes : The number of times to sequentially blur the incoming image. The more passes, the slower the filter.
+The amount of blur radius that should be applied to the image
 
-<b>iOS Blur Example</b>
+
+<b>Example</b>
 ~~~
-var imgView = mod.createGPUBlurImageView({
-	height:Ti.UI.FILL, width:Ti.UI.FILL,
-	image:"42553_m.jpg",
-	blur:{
-		type:mod.IOS_BLUR, radiusInPixels:1
-	}		
-});
+	var vwTest = mod.createBasicBlurView({
+		width:Ti.UI.FILL, height:Ti.UI.FILL, blurRadius:10,
+		image: 'your-image-here.png'
+	});
 ~~~
 
-<b>Box Blur Example</b>
-~~~
-var imgView = mod.createGPUBlurImageView({
-	height:Ti.UI.FILL, width:Ti.UI.FILL,
-	image:"42553_m.jpg",
-	blur:{
-		type:mod.BOX_BLUR, radiusInPixels:5
-	}		
-});
-~~~
-
-<b>Gaussian Blur Example</b>
-~~~
-var imgView = mod.createGPUBlurImageView({
-	height:Ti.UI.FILL, width:Ti.UI.FILL,
-	image:"42553_m.jpg",
-	blur:{
-		type:mod.GAUSSIAN_BLUR, radiusInPixels:2.5
-	}		
-});
-~~~

@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.32
+version: 0.1
 apiversion: 2
 description: BlurView implementation for Titanium
 author: Benjamin Bahrenburg
@@ -11,8 +11,8 @@ copyright: Copyright (c) 2014 by Benjamin Bahrenburg (bencoding)
 
 
 # these should not be edited
-name: Blur
+name: blurview
 moduleid: bencoding.blur
-guid: d85a60ff-a204-4a70-b16a-315bd61c7d0d
-platform: iphone
-minsdk: 3.2.0.GA
+guid: 138fe2ab-9428-469b-b144-02ac8c2167e8
+platform: android
+minsdk: 3.2.1.GA

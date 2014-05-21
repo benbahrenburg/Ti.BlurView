@@ -5,6 +5,7 @@ var win = Ti.UI.createWindow({
 });
 
 var data =[
+	{title:"Basic Blur", hasChild:true, header:"Basic Blur Demos", itemId:-2},
 	{title:"Blur Background", hasChild:true, header:"View Demos", itemId:0},
 	{title:"Blur Overlay", hasChild:true, itemId:1},
 	{title:"Blur & Tinted Overlay", hasChild:true, itemId:2},
@@ -25,6 +26,9 @@ var tableView = Ti.UI.createTableView({
 win.add(tableView);
 
 tableView.addEventListener('click',function(e){
+	if(e.rowData.itemId===-2){
+		tabGroup.activeTab.open(require('basic_blur_view_example').createWindow());
+	}
 	if(e.rowData.itemId===0){
 		tabGroup.activeTab.open(require('overlay_bg_demo').createWindow());
 	}

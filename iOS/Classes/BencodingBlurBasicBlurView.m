@@ -41,44 +41,19 @@
     }else{
 
         GPUImageBoxBlurFilter *filter = [[GPUImageBoxBlurFilter alloc] init];
+
         if(_debug){
             NSLog(@"[DEBUG] GPUBlurImageView: radiusInPixels %f",
                   blurRadius);
         }
+
         filter.blurRadiusInPixels = blurRadius;
-
-        if([self valueForUndefinedKey:@"radiusAsFractionOfImageWidth"] !=nil){
-            if(_debug){
-                NSLog(@"[DEBUG] GPUBlurImageView: radiusAsFractionOfImageWidth %f",
-                      [TiUtils floatValue:[self valueForUndefinedKey:@"radiusAsFractionOfImageWidth"]]);
-            }
-            filter.blurRadiusAsFractionOfImageWidth =
-            [TiUtils floatValue:[self valueForUndefinedKey:@"radiusAsFractionOfImageWidth"]];
-        }
-
-        if([self valueForUndefinedKey:@"radiusAsFractionOfImageHeight"] !=nil){
-            if(_debug){
-                NSLog(@"[DEBUG] GPUBlurImageView: radiusAsFractionOfImageHeight %f",
-                      [TiUtils floatValue:[self valueForUndefinedKey:@"radiusAsFractionOfImageHeight"]]);
-            }
-            filter.blurRadiusAsFractionOfImageHeight =
-            [TiUtils floatValue:[self valueForUndefinedKey:@"radiusAsFractionOfImageHeight"]];
-        }
-
-        if([self valueForUndefinedKey:@"blurPasses"] !=nil){
-            if(_debug){
-                NSLog(@"[DEBUG] GPUBlurImageView: blurPasses %f",
-                      [TiUtils floatValue:[self valueForUndefinedKey:@"blurPasses"]]);
-            }
-            filter.blurPasses =
-            [TiUtils floatValue:[self valueForUndefinedKey:@"blurPasses"]];
-        }
 
         [imageView setImage:[filter imageByFilteringImage:imageView.image]];
     }
 }
 
--(void)setBlurRadius:(id)value
+-(void)setBlurRadius_:(id)value
 {
 
     float blurRadius = [TiUtils floatValue:value def:5];

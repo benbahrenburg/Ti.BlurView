@@ -4,8 +4,7 @@ The Ti.Blur project allows you to create a blur view using either the contents o
 
 Below is a gif showing the example app in action on both iOS and Android.  For a more complete walk through see the [video](http://www.youtube.com/watch?v=mXU5dUkibls).
 
-![Animation](https://raw.githubusercontent.com/benbahrenburg/Ti.BlurView/master/Screenshots/ios_demo.gif)
-
+![Animation](https://raw.githubusercontent.com/benbahrenburg/Ti.BlurView/master/Screenshots/ios_demo.gif) ![Animation](https://raw.githubusercontent.com/benbahrenburg/Ti.BlurView/master/Screenshots/android-blur.gif)
 
 <h2>Before you start</h2>
 * This is an iOS and Android native module designed to work with Titanium SDK 3.2.0.GA

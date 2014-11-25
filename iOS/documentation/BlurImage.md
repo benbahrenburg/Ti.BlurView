@@ -34,6 +34,8 @@ The view parameter contains a reference to the view who's contents you wish to h
 
 The image parameter is the url to an image that will be used in the blur process.
 
+***This URL must be local to your app, remove images are not supported***
+
 <b>blurFilter</b> :  String
 
 The blurFilter property sets which filter is used during the bend process.  By default this is set to CIGaussianBlur. 

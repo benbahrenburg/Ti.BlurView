@@ -65,7 +65,7 @@ blurView.clearContents();
 
 <b>onPresent</b> 
 
-The onPresent event is fired when the view is rendered or refreshed.  This is a good place to se the backgroundView you are using the blurCroppedToRect:true and the referencing view has not yet rendered to screen.
+The onPresent event is fired when the view is rendered or refreshed.  This is a good place to set the backgroundView you are using the blurCroppedToRect:true and the referencing view has not yet rendered to screen.
 
 ~~~
 blurView.addEventListener('onPresent',function(d){

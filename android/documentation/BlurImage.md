@@ -17,7 +17,7 @@ The blurRadius property sets how blurry the image is.  By default this value is 
 <b>image</b> :  Url to image
 
 The image parameter is the url to an image that will be used in the blur process.
-
+***This URL must be local to your app, remove images are not supported***
 
 <b>Example - Blurred Background</b>
 <pre><code>

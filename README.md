@@ -38,7 +38,7 @@ Import the project into Eclipse:
 <h2>Setup</h2>
 
 * Download the latest release from the releases folder ( or you can build it yourself )
-* Install the ti.sq module. If you need help here is a "How To" [guide](https://wiki.appcelerator.org/display/guides/Configuring+Apps+to+Use+Modules). 
+* Install the ti.sq module. If you need help here is a "How To" [guide](https://wiki.appcelerator.org/display/guides2/Using+Modules). 
 * You can now use the module via the commonJS require method, example shown below.
 
 <h2>Importing the module using require</h2>

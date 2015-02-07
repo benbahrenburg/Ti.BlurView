@@ -138,3 +138,59 @@ win.addEventListener('open',function(d){
 
 win.open();
 </code></pre>
+
+
+<h3>applyGPUBlurTo</h3>
+
+The applyGPUBlurTo method takes a dictionary with the following fields.
+
+<b>Fields</b>
+
+<b>type</b> : The type of GPU Blur effect to be used.
+
+The type of GPU Blur effect to be used. Supported; IOS_BLUR, BOX_BLUR, GAUSSIAN_BLUR
+
+<b>image</b> :  Url to image
+
+The image parameter is the url to an image that will be used in the blur process.
+
+***This URL must be local to your app, remove images are not supported***
+
+
+<b>Example - GPU Blurred Background</b>
+<pre><code>
+var mod = require('bencoding.blur');
+
+var win = Ti.UI.createWindow({
+	backgroundColor:'blue'
+});
+
+var imgView = Ti.UI.createImageView({
+	height:Ti.UI.FILL, width:Ti.UI.FILL, 
+});
+bgView.add(imgView);	
+
+win.addEventListener('open',function(d){
+
+	var img = mod.applyGPUBlurTo({
+		image: "42553_m.jpg", type:mod.IOS_BLUR
+	});
+
+	imgView.image = img;
+
+	var container = Ti.UI.createView({
+		backgroundColor:"#fff", borderRadius:20,
+		top:100, height:150, left:40, right:40
+	});
+	imgView.add(container);
+	var label = Ti.UI.createLabel({
+		text:"Show how to blur like the yahoo weather app.", 
+		color:"#000", width:Ti.UI.FILL, height:50, textAlign:"center"
+	});	
+	container.add(label);	
+});
+
+win.open();
+
+</code></pre>
+

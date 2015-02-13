@@ -210,6 +210,7 @@
 		43B47AF218DD43D500063D3C /* BXBGPUHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B47AF018DD43D500063D3C /* BXBGPUHelpers.m */; };
 		AA747D9F0F9514B9006C5449 /* BencodingBlur_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* BencodingBlur_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		CA3E6A381A8E56B0009C6B95 /* GPUImagePicture+TextureSubimage.h in Headers */ = {isa = PBXBuildFile; fileRef = CA3E6A371A8E56B0009C6B95 /* GPUImagePicture+TextureSubimage.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,6 +413,7 @@
 		43B47AF018DD43D500063D3C /* BXBGPUHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BXBGPUHelpers.m; path = Classes/BXBGPUHelpers.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* BencodingBlur_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BencodingBlur_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CA3E6A371A8E56B0009C6B95 /* GPUImagePicture+TextureSubimage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GPUImagePicture+TextureSubimage.h"; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libBencodingBlur.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBencodingBlur.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -509,6 +511,7 @@
 		43740DB418DCFE9500D3155C /* include */ = {
 			isa = PBXGroup;
 			children = (
+				CA3E6A371A8E56B0009C6B95 /* GPUImagePicture+TextureSubimage.h */,
 				43740DB518DCFE9500D3155C /* GLProgram.h */,
 				43740DB618DCFE9500D3155C /* GPUImage.h */,
 				43740DB718DCFE9500D3155C /* GPUImage3x3ConvolutionFilter.h */,
@@ -767,6 +770,7 @@
 				43740ECD18DCFE9600D3155C /* GPUImageRGBClosingFilter.h in Headers */,
 				43740E8718DCFE9600D3155C /* GPUImageFilterGroup.h in Headers */,
 				43740EE818DCFE9600D3155C /* GPUImageThresholdEdgeDetectionFilter.h in Headers */,
+				CA3E6A381A8E56B0009C6B95 /* GPUImagePicture+TextureSubimage.h in Headers */,
 				43740ED018DCFE9600D3155C /* GPUImageRGBFilter.h in Headers */,
 				4325C88B192B97E7004DA7BF /* BencodingBlurBasicBlurViewProxy.h in Headers */,
 				43740EBE18DCFE9600D3155C /* GPUImageOutput.h in Headers */,

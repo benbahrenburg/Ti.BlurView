@@ -74,7 +74,7 @@
 {
 
     ENSURE_SINGLE_ARG(args,NSDictionary);
-    ENSURE_UI_THREAD(applyGPUBlurTo, args);
+    //ENSURE_UI_THREAD(applyGPUBlurTo, args);
     
     NSString *filterType = kBBIOSBlur;
     UIImage *workingImg = nil;
@@ -138,7 +138,7 @@
 -(id) applyBlurTo:(id)args
 {
     ENSURE_SINGLE_ARG(args,NSDictionary);
-    ENSURE_UI_THREAD(applyGPUBlurTo, args);
+    //ENSURE_UI_THREAD(applyGPUBlurTo, args);
     
     NSString *filterName = @"CIGaussianBlur";
     UIImage *workingImg = nil;

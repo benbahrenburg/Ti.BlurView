@@ -1,0 +1,3 @@
+{
+    "exports": ["Ti.UI.createImageView"]
+}

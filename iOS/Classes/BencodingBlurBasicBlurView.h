@@ -11,6 +11,7 @@
 @private
     BOOL _debug;
     int _imageWait;
+    int _retries;
 }
 
 

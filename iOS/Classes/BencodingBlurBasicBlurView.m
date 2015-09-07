@@ -19,6 +19,7 @@
 {
     _debug = NO;
     _imageWait = 200;
+    _retries = 1;
 	[super initializeState];
 }
 
@@ -30,6 +31,11 @@
 -(void) setBlurImageWait_:(id)value
 {
     _imageWait =[TiUtils intValue:value def:200];
+}
+
+-(void) setBlurImageRetries_:(id)value
+{
+    _retries =[TiUtils intValue:value def:1];
 }
 
 -(void) applyBlur:(UIImageView*) imageView withBlurRadius:(float)blurRadius
@@ -50,6 +56,29 @@
         filter.blurRadiusInPixels = blurRadius;
 
         [imageView setImage:[filter imageByFilteringImage:imageView.image]];
+    }
+}
+
+-(void)fireTimeout:(int)tries
+{
+    if ([self.proxy _hasListeners:@"blurred"]){
+        NSDictionary * props = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"success",NUMBOOL(NO),
+                                @"message",@"timeout",
+                                [NSNumber numberWithInt:tries],@"tries",
+                                nil];
+        [self.proxy fireEvent:@"blurred" withObject:props];
+    }
+}
+
+-(void)fireBlurred:(int)tries
+{
+    if ([self.proxy _hasListeners:@"blurred"]){
+        NSDictionary * props = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"success",NUMBOOL(YES),
+                                [NSNumber numberWithInt:tries],@"tries",
+                                nil];
+        [self.proxy fireEvent:@"blurred" withObject:props];
     }
 }
 
@@ -74,18 +103,30 @@
         if(_debug){
             NSLog(@"[DEBUG] GPUBlurImageView : No image yet, queued");
         }
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, _imageWait);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self applyBlur:imageView withBlurRadius:blurRadius];
-        });
+
+        __block int retryCount = 0;
+        
+        while ( retryCount < _retries ) {
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, _imageWait);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                if( imageView.image == nil ){
+                    if(retryCount == _retries){
+                        [self fireTimeout:retryCount];
+                    }
+                }else{
+                    [self applyBlur:imageView withBlurRadius:blurRadius];
+                    [self fireBlurred:retryCount];
+                }
+                retryCount++;
+            });
+        }
+        
     }else{
         if(_debug){
             NSLog(@"[DEBUG] GPUBlurImageView : Image available, starting");
         }
         [self applyBlur:imageView withBlurRadius:blurRadius];
+        [self fireBlurred:0];
     }
 }
-
-
-
 @end

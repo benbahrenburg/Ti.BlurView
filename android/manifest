@@ -2,8 +2,8 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.3.0
-apiversion: 2
+version: 1.0.0
+apiversion: 4
 description: BlurView implementation for Titanium
 author: Benjamin Bahrenburg
 license: Apache 2.0
@@ -15,5 +15,5 @@ name: blurview
 moduleid: bencoding.blur
 guid: 138fe2ab-9428-469b-b144-02ac8c2167e8
 platform: android
-architectures: armeabi armeabi-v7a x86
-minsdk: 5.0.2.GA
+architectures: arm64-v8a armeabi-v7a x86
+minsdk: 7.0.0.GA
